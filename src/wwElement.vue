@@ -351,9 +351,9 @@ export default {
   padding: var(--padding);
   border-radius: var(--border-radius);
   border: var(--border);
-  color: var(--text-color);
-  font-size: var(--font-size);
-  font-family: var(--font-family);
+  color: var(--text-color) !important;
+  font-size: var(--font-size) !important;
+  font-family: var(--font-family) !important;
   line-height: var(--line-height);
   text-align: var(--text-align);
 
@@ -364,49 +364,49 @@ export default {
   }
 
   h1 {
-    font-size: var(--heading1-font-size, 2em);
-    color: var(--heading1-color);
-    font-family: var(--heading1-font-family);
+    font-size: var(--heading1-font-size, 2em) !important;
+    color: var(--heading1-color) !important;
+    font-family: var(--heading1-font-family) !important;
   }
   h2 {
-    font-size: var(--heading2-font-size, 1.5em);
-    color: var(--heading2-color);
-    font-family: var(--heading2-font-family);
+    font-size: var(--heading2-font-size, 1.5em) !important;
+    color: var(--heading2-color) !important;
+    font-family: var(--heading2-font-family) !important;
   }
   h3 {
-    font-size: var(--heading3-font-size, 1.25em);
-    color: var(--heading3-color);
-    font-family: var(--heading3-font-family);
+    font-size: var(--heading3-font-size, 1.25em) !important;
+    color: var(--heading3-color) !important;
+    font-family: var(--heading3-font-family) !important;
   }
   h4 {
-    font-size: var(--heading4-font-size, 1.1em);
-    color: var(--heading4-color);
-    font-family: var(--heading4-font-family);
+    font-size: var(--heading4-font-size, 1.1em) !important;
+    color: var(--heading4-color) !important;
+    font-family: var(--heading4-font-family) !important;
   }
   h5 {
-    font-size: var(--heading5-font-size, 1em);
-    color: var(--heading5-color);
-    font-family: var(--heading5-font-family);
+    font-size: var(--heading5-font-size, 1em) !important;
+    color: var(--heading5-color) !important;
+    font-family: var(--heading5-font-family) !important;
   }
   h6 {
-    font-size: var(--heading6-font-size, 0.9em);
-    color: var(--heading6-color);
-    font-family: var(--heading6-font-family);
+    font-size: var(--heading6-font-size, 0.9em) !important;
+    color: var(--heading6-color) !important;
+    font-family: var(--heading6-font-family) !important;
   }
 
   p {
     margin: 0.5em 0;
-    color: var(--paragraph-color);
-    font-size: var(--paragraph-font-size);
-    font-family: var(--paragraph-font-family);
+    color: var(--paragraph-color) !important;
+    font-size: var(--paragraph-font-size) !important;
+    font-family: var(--paragraph-font-family) !important;
   }
 
   ul, ol {
     margin: 0.5em 0;
     padding-left: 2em;
-    color: var(--list-color);
-    font-size: var(--list-font-size);
-    font-family: var(--list-font-family);
+    color: var(--list-color) !important;
+    font-size: var(--list-font-size) !important;
+    font-family: var(--list-font-family) !important;
   }
 
   ul li, ol li {
@@ -434,9 +434,9 @@ export default {
   }
 
   a {
-    color: var(--link-color);
-    font-size: var(--link-font-size);
-    text-decoration: var(--link-text-decoration);
+    color: var(--link-color) !important;
+    font-size: var(--link-font-size) !important;
+    text-decoration: var(--link-text-decoration) !important;
 
     &:hover {
       filter: brightness(0.85);
