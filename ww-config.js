@@ -118,6 +118,23 @@ export default {
       responsive: true,
       hidden: (content) => content.styleTarget !== "base",
     },
+    fontWeight: {
+      label: { en: "Font Weight" },
+      type: "TextSelect",
+      section: "style",
+      options: {
+        options: [
+          { value: "", label: { en: "Default" } },
+          { value: "300", label: { en: "Light" } },
+          { value: "400", label: { en: "Normal" } },
+          { value: "500", label: { en: "Medium" } },
+          { value: "600", label: { en: "Semi Bold" } },
+          { value: "700", label: { en: "Bold" } },
+          { value: "800", label: { en: "Extra Bold" } },
+        ],
+      },
+      hidden: (content) => content.styleTarget !== "base",
+    },
     lineHeight: {
       label: {
         en: "Line Height",
@@ -261,6 +278,23 @@ export default {
       responsive: true,
       hidden: (content) => content.styleTarget !== "paragraph",
     },
+    paragraphFontWeight: {
+      label: { en: "Paragraph Font Weight" },
+      type: "TextSelect",
+      section: "style",
+      options: {
+        options: [
+          { value: "", label: { en: "Default" } },
+          { value: "300", label: { en: "Light" } },
+          { value: "400", label: { en: "Normal" } },
+          { value: "500", label: { en: "Medium" } },
+          { value: "600", label: { en: "Semi Bold" } },
+          { value: "700", label: { en: "Bold" } },
+          { value: "800", label: { en: "Extra Bold" } },
+        ],
+      },
+      hidden: (content) => content.styleTarget !== "paragraph",
+    },
 
     heading1Color: {
       label: { en: "Heading 1 Color" },
@@ -290,6 +324,23 @@ export default {
       type: "FontFamily",
       section: "style",
       responsive: true,
+      hidden: (content) => content.styleTarget !== "heading1",
+    },
+    heading1FontWeight: {
+      label: { en: "Heading 1 Font Weight" },
+      type: "TextSelect",
+      section: "style",
+      options: {
+        options: [
+          { value: "", label: { en: "Default" } },
+          { value: "300", label: { en: "Light" } },
+          { value: "400", label: { en: "Normal" } },
+          { value: "500", label: { en: "Medium" } },
+          { value: "600", label: { en: "Semi Bold" } },
+          { value: "700", label: { en: "Bold" } },
+          { value: "800", label: { en: "Extra Bold" } },
+        ],
+      },
       hidden: (content) => content.styleTarget !== "heading1",
     },
 
@@ -323,6 +374,23 @@ export default {
       responsive: true,
       hidden: (content) => content.styleTarget !== "heading2",
     },
+    heading2FontWeight: {
+      label: { en: "Heading 2 Font Weight" },
+      type: "TextSelect",
+      section: "style",
+      options: {
+        options: [
+          { value: "", label: { en: "Default" } },
+          { value: "300", label: { en: "Light" } },
+          { value: "400", label: { en: "Normal" } },
+          { value: "500", label: { en: "Medium" } },
+          { value: "600", label: { en: "Semi Bold" } },
+          { value: "700", label: { en: "Bold" } },
+          { value: "800", label: { en: "Extra Bold" } },
+        ],
+      },
+      hidden: (content) => content.styleTarget !== "heading2",
+    },
 
     heading3Color: {
       label: { en: "Heading 3 Color" },
@@ -352,6 +420,23 @@ export default {
       type: "FontFamily",
       section: "style",
       responsive: true,
+      hidden: (content) => content.styleTarget !== "heading3",
+    },
+    heading3FontWeight: {
+      label: { en: "Heading 3 Font Weight" },
+      type: "TextSelect",
+      section: "style",
+      options: {
+        options: [
+          { value: "", label: { en: "Default" } },
+          { value: "300", label: { en: "Light" } },
+          { value: "400", label: { en: "Normal" } },
+          { value: "500", label: { en: "Medium" } },
+          { value: "600", label: { en: "Semi Bold" } },
+          { value: "700", label: { en: "Bold" } },
+          { value: "800", label: { en: "Extra Bold" } },
+        ],
+      },
       hidden: (content) => content.styleTarget !== "heading3",
     },
 
@@ -385,6 +470,23 @@ export default {
       responsive: true,
       hidden: (content) => content.styleTarget !== "heading4",
     },
+    heading4FontWeight: {
+      label: { en: "Heading 4 Font Weight" },
+      type: "TextSelect",
+      section: "style",
+      options: {
+        options: [
+          { value: "", label: { en: "Default" } },
+          { value: "300", label: { en: "Light" } },
+          { value: "400", label: { en: "Normal" } },
+          { value: "500", label: { en: "Medium" } },
+          { value: "600", label: { en: "Semi Bold" } },
+          { value: "700", label: { en: "Bold" } },
+          { value: "800", label: { en: "Extra Bold" } },
+        ],
+      },
+      hidden: (content) => content.styleTarget !== "heading4",
+    },
 
     heading5Color: {
       label: { en: "Heading 5 Color" },
@@ -414,6 +516,23 @@ export default {
       type: "FontFamily",
       section: "style",
       responsive: true,
+      hidden: (content) => content.styleTarget !== "heading5",
+    },
+    heading5FontWeight: {
+      label: { en: "Heading 5 Font Weight" },
+      type: "TextSelect",
+      section: "style",
+      options: {
+        options: [
+          { value: "", label: { en: "Default" } },
+          { value: "300", label: { en: "Light" } },
+          { value: "400", label: { en: "Normal" } },
+          { value: "500", label: { en: "Medium" } },
+          { value: "600", label: { en: "Semi Bold" } },
+          { value: "700", label: { en: "Bold" } },
+          { value: "800", label: { en: "Extra Bold" } },
+        ],
+      },
       hidden: (content) => content.styleTarget !== "heading5",
     },
 
@@ -447,6 +566,23 @@ export default {
       responsive: true,
       hidden: (content) => content.styleTarget !== "heading6",
     },
+    heading6FontWeight: {
+      label: { en: "Heading 6 Font Weight" },
+      type: "TextSelect",
+      section: "style",
+      options: {
+        options: [
+          { value: "", label: { en: "Default" } },
+          { value: "300", label: { en: "Light" } },
+          { value: "400", label: { en: "Normal" } },
+          { value: "500", label: { en: "Medium" } },
+          { value: "600", label: { en: "Semi Bold" } },
+          { value: "700", label: { en: "Bold" } },
+          { value: "800", label: { en: "Extra Bold" } },
+        ],
+      },
+      hidden: (content) => content.styleTarget !== "heading6",
+    },
 
     linkColor: {
       label: { en: "Link Color" },
@@ -454,6 +590,23 @@ export default {
       section: "style",
       bindable: true,
       responsive: true,
+      hidden: (content) => content.styleTarget !== "link",
+    },
+    linkFontWeight: {
+      label: { en: "Link Font Weight" },
+      type: "TextSelect",
+      section: "style",
+      options: {
+        options: [
+          { value: "", label: { en: "Default" } },
+          { value: "300", label: { en: "Light" } },
+          { value: "400", label: { en: "Normal" } },
+          { value: "500", label: { en: "Medium" } },
+          { value: "600", label: { en: "Semi Bold" } },
+          { value: "700", label: { en: "Bold" } },
+          { value: "800", label: { en: "Extra Bold" } },
+        ],
+      },
       hidden: (content) => content.styleTarget !== "link",
     },
     linkFontSize: {
@@ -507,6 +660,23 @@ export default {
       type: "FontFamily",
       section: "style",
       responsive: true,
+      hidden: (content) => content.styleTarget !== "list",
+    },
+    listFontWeight: {
+      label: { en: "List Font Weight" },
+      type: "TextSelect",
+      section: "style",
+      options: {
+        options: [
+          { value: "", label: { en: "Default" } },
+          { value: "300", label: { en: "Light" } },
+          { value: "400", label: { en: "Normal" } },
+          { value: "500", label: { en: "Medium" } },
+          { value: "600", label: { en: "Semi Bold" } },
+          { value: "700", label: { en: "Bold" } },
+          { value: "800", label: { en: "Extra Bold" } },
+        ],
+      },
       hidden: (content) => content.styleTarget !== "list",
     },
   },
