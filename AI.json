@@ -1,0 +1,43 @@
+{
+  "metadata": {
+    "name": "rich-text-editor",
+    "description": "Displays rich HTML content with a design-time toolbar (headings, bold/italic/underline, links, lists, images) for editing the underlying HTML via a text box, plus full typography/container styling controls.",
+    "keywords": ["rich text", "html", "editor", "content", "typography"],
+    "features": [
+      "Bindable HTML content property",
+      "Design-time toolbar for inserting headings, bold/italic/underline, links, lists, and images",
+      "Full container and typography styling (color, font, alignment, background, border)"
+    ],
+    "inherit": []
+  },
+  "properties": [
+    { "name": "text", "description": "The HTML content to render.", "type": "string", "defaultValue": "<p>Type or paste your content in the HTML Source box above, or use the toolbar buttons.</p>" },
+    { "name": "textColor", "description": "Default text color.", "type": "string", "defaultValue": "" },
+    { "name": "fontSize", "description": "Base font size.", "type": "string", "defaultValue": "" },
+    { "name": "fontFamily", "description": "Font family.", "type": "string", "defaultValue": "" },
+    { "name": "lineHeight", "description": "Line height.", "type": "string", "defaultValue": "" },
+    { "name": "textAlign", "description": "Text alignment: left, center, right, or justify.", "type": "string", "defaultValue": "left" },
+    { "name": "backgroundColor", "description": "Container background color.", "type": "string", "defaultValue": "" },
+    { "name": "padding", "description": "Container padding.", "type": "string", "defaultValue": "" },
+    { "name": "showBorder", "description": "Whether to show a border around the container.", "type": "boolean", "defaultValue": false },
+    { "name": "borderWidth", "description": "Border width (when showBorder is true).", "type": "string", "defaultValue": "1px" },
+    { "name": "borderStyle", "description": "Border style: solid, dashed, or dotted (when showBorder is true).", "type": "string", "defaultValue": "solid" },
+    { "name": "borderColor", "description": "Border color (when showBorder is true).", "type": "string", "defaultValue": "#dddddd" },
+    { "name": "borderRadius", "description": "Container border radius.", "type": "string", "defaultValue": "0px" }
+  ],
+  "states": [],
+  "events": [],
+  "localContext": [],
+  "actions": [],
+  "slots": [],
+  "variables": [],
+  "specifications": [
+    "The toolbar and HTML source text box only render inside the WeWeb Editor (design time) — the published site renders the content via a static HTML display only.",
+    "Formatting is applied by selecting text in the HTML source box (via keyboard selection, e.g. Shift+Arrow or Cmd/Ctrl+A) and clicking a toolbar button, which wraps the selection with the corresponding HTML tag.",
+    "The `text` property is a raw HTML string; headings, paragraphs, lists, links, and images are all standard HTML tags rendered with built-in typography styling."
+  ],
+  "examples": [
+    { "description": "Minimal working preset", "example": "{\"text\": \"<h2>Heading</h2><p>Some <strong>bold</strong> text.</p>\"}" }
+  ],
+  "dependencies": []
+}
