@@ -66,6 +66,7 @@ export default {
       section: "style",
       options: {
         options: [
+          { value: "base", label: { en: "Default (all text)" } },
           { value: "paragraph", label: { en: "Paragraph" } },
           { value: "heading1", label: { en: "Heading 1" } },
           { value: "heading2", label: { en: "Heading 2" } },
@@ -77,22 +78,23 @@ export default {
           { value: "list", label: { en: "List" } },
         ],
       },
-      defaultValue: "paragraph",
+      defaultValue: "base",
     },
 
     // Base/fallback styling — applies to any element type without its own override below
     textColor: {
       label: {
-        en: "Base Text Color",
+        en: "Text Color",
       },
       type: "Color",
       section: "style",
       bindable: true,
       responsive: true,
+      hidden: (content) => content.styleTarget !== "base",
     },
     fontSize: {
       label: {
-        en: "Base Font Size",
+        en: "Font Size",
       },
       type: "Length",
       section: "style",
@@ -105,18 +107,20 @@ export default {
       },
       defaultValue: "16px",
       responsive: true,
+      hidden: (content) => content.styleTarget !== "base",
     },
     fontFamily: {
       label: {
-        en: "Base Font Family",
+        en: "Font Family",
       },
       type: "FontFamily",
       section: "style",
       responsive: true,
+      hidden: (content) => content.styleTarget !== "base",
     },
     lineHeight: {
       label: {
-        en: "Base Line Height",
+        en: "Line Height",
       },
       type: "Length",
       section: "style",
@@ -132,6 +136,7 @@ export default {
       },
       defaultValue: "auto",
       responsive: true,
+      hidden: (content) => content.styleTarget !== "base",
     },
     textAlign: {
       label: {
