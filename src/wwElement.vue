@@ -126,6 +126,18 @@ export default {
         '--border': this.content.showBorder
           ? `${this.content.borderWidth || '1px'} ${this.content.borderStyle || 'solid'} ${this.content.borderColor || '#ddd'}`
           : 'none',
+        '--heading-color': this.content.headingColor || this.content.textColor || '#000000',
+        '--heading-font-size': this.content.headingFontSize || undefined,
+        '--heading-font-family': this.content.headingFontFamily || this.content.fontFamily || 'inherit',
+        '--paragraph-color': this.content.paragraphColor || this.content.textColor || '#000000',
+        '--paragraph-font-size': this.content.paragraphFontSize || this.content.fontSize || '16px',
+        '--paragraph-font-family': this.content.paragraphFontFamily || this.content.fontFamily || 'inherit',
+        '--link-color': this.content.linkColor || '#007bff',
+        '--link-font-size': this.content.linkFontSize || this.content.fontSize || '16px',
+        '--link-text-decoration': this.content.linkUnderline === false ? 'none' : 'underline',
+        '--list-color': this.content.listColor || this.content.textColor || '#000000',
+        '--list-font-size': this.content.listFontSize || this.content.fontSize || '16px',
+        '--list-font-family': this.content.listFontFamily || this.content.fontFamily || 'inherit',
       };
     },
   },
@@ -334,22 +346,30 @@ export default {
     margin: 0.75em 0 0.5em 0;
     font-weight: 600;
     line-height: 1.3;
+    color: var(--heading-color);
+    font-family: var(--heading-font-family);
   }
 
-  h1 { font-size: 2em; }
-  h2 { font-size: 1.5em; }
-  h3 { font-size: 1.25em; }
-  h4 { font-size: 1.1em; }
-  h5 { font-size: 1em; }
-  h6 { font-size: 0.9em; }
+  h1 { font-size: var(--heading-font-size, 2em); }
+  h2 { font-size: var(--heading-font-size, 1.5em); }
+  h3 { font-size: var(--heading-font-size, 1.25em); }
+  h4 { font-size: var(--heading-font-size, 1.1em); }
+  h5 { font-size: var(--heading-font-size, 1em); }
+  h6 { font-size: var(--heading-font-size, 0.9em); }
 
   p {
     margin: 0.5em 0;
+    color: var(--paragraph-color);
+    font-size: var(--paragraph-font-size);
+    font-family: var(--paragraph-font-family);
   }
 
   ul, ol {
     margin: 0.5em 0;
     padding-left: 2em;
+    color: var(--list-color);
+    font-size: var(--list-font-size);
+    font-family: var(--list-font-family);
   }
 
   ul li, ol li {
@@ -377,11 +397,12 @@ export default {
   }
 
   a {
-    color: #007bff;
-    text-decoration: underline;
+    color: var(--link-color);
+    font-size: var(--link-font-size);
+    text-decoration: var(--link-text-decoration);
 
     &:hover {
-      color: #0056b3;
+      filter: brightness(0.85);
     }
   }
 

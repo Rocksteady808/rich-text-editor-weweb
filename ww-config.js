@@ -194,5 +194,101 @@ export default {
       },
       defaultValue: "0px",
     },
+
+    // Heading Styling
+    headingColor: {
+      label: { en: "Heading Color" },
+      type: "Color",
+      section: "style",
+      bindable: true,
+      responsive: true,
+    },
+    headingFontSize: {
+      label: { en: "Heading Font Size" },
+      type: "Length",
+      section: "style",
+      options: {
+        unitChoices: [{ value: "px", label: "px", min: 8, max: 120 }],
+      },
+      responsive: true,
+    },
+    headingFontFamily: {
+      label: { en: "Heading Font Family" },
+      type: "FontFamily",
+      section: "style",
+      responsive: true,
+    },
+
+    // Paragraph Styling
+    paragraphColor: {
+      label: { en: "Paragraph Color" },
+      type: "Color",
+      section: "style",
+      bindable: true,
+      responsive: true,
+    },
+    paragraphFontSize: {
+      label: { en: "Paragraph Font Size" },
+      type: "Length",
+      section: "style",
+      options: {
+        unitChoices: [{ value: "px", label: "px", min: 8, max: 100 }],
+      },
+      responsive: true,
+    },
+    paragraphFontFamily: {
+      label: { en: "Paragraph Font Family" },
+      type: "FontFamily",
+      section: "style",
+      responsive: true,
+    },
+
+    // Link Styling
+    linkColor: {
+      label: { en: "Link Color" },
+      type: "Color",
+      section: "style",
+      bindable: true,
+      responsive: true,
+    },
+    linkFontSize: {
+      label: { en: "Link Font Size" },
+      type: "Length",
+      section: "style",
+      options: {
+        unitChoices: [{ value: "px", label: "px", min: 8, max: 100 }],
+      },
+      responsive: true,
+    },
+    linkUnderline: {
+      label: { en: "Underline Links" },
+      type: "OnOff",
+      section: "style",
+      defaultValue: true,
+    },
+
+    // List Styling
+    listColor: {
+      label: { en: "List Color" },
+      type: "Color",
+      section: "style",
+      bindable: true,
+      responsive: true,
+    },
+    listFontSize: {
+      label: { en: "List Font Size" },
+      type: "Length",
+      section: "style",
+      options: {
+        unitChoices: [{ value: "px", label: "px", min: 8, max: 100 }],
+      },
+      responsive: true,
+    },
+    listFontFamily: {
+      label: { en: "List Font Family" },
+      type: "FontFamily",
+      section: "style",
+      responsive: true,
+    },
   },
 };
