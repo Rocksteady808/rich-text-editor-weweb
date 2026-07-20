@@ -80,10 +80,10 @@ export default {
       defaultValue: "paragraph",
     },
 
-    // Styling Properties
+    // Base/fallback styling — applies to any element type without its own override below
     textColor: {
       label: {
-        en: "Text Color",
+        en: "Base Text Color",
       },
       type: "Color",
       section: "style",
@@ -92,7 +92,7 @@ export default {
     },
     fontSize: {
       label: {
-        en: "Font Size",
+        en: "Base Font Size",
       },
       type: "Length",
       section: "style",
@@ -108,7 +108,7 @@ export default {
     },
     fontFamily: {
       label: {
-        en: "Font Family",
+        en: "Base Font Family",
       },
       type: "FontFamily",
       section: "style",
@@ -116,7 +116,7 @@ export default {
     },
     lineHeight: {
       label: {
-        en: "Line Height",
+        en: "Base Line Height",
       },
       type: "Length",
       section: "style",
