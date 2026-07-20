@@ -57,17 +57,23 @@ function cleanPastedHtml(html, doc) {
   container.innerHTML = html;
 
   const stripNode = (node) => {
-    Array.from(node.childNodes).forEach((child) => {
-      if (child.nodeType !== 1) return;
+    let child = node.firstChild;
+    while (child) {
+      if (child.nodeType !== 1) {
+        child = child.nextSibling;
+        continue;
+      }
 
       const tag = child.tagName.toLowerCase();
       if (!ALLOWED_PASTE_TAGS.includes(tag)) {
+        const firstMoved = child.firstChild;
         while (child.firstChild) {
           node.insertBefore(child.firstChild, child);
         }
+        const originalNext = child.nextSibling;
         node.removeChild(child);
-        stripNode(node);
-        return;
+        child = firstMoved || originalNext;
+        continue;
       }
 
       child.removeAttribute('style');
@@ -78,7 +84,8 @@ function cleanPastedHtml(html, doc) {
         child.removeAttribute('href');
       }
       stripNode(child);
-    });
+      child = child.nextSibling;
+    }
   };
 
   stripNode(container);
