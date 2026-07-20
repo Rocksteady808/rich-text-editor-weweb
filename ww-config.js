@@ -59,6 +59,27 @@ export default {
       ],
     },
 
+    // Per-element styling: pick a target, then only that target's controls show
+    styleTarget: {
+      label: { en: "Style Element" },
+      type: "TextSelect",
+      section: "style",
+      options: {
+        options: [
+          { value: "paragraph", label: { en: "Paragraph" } },
+          { value: "heading1", label: { en: "Heading 1" } },
+          { value: "heading2", label: { en: "Heading 2" } },
+          { value: "heading3", label: { en: "Heading 3" } },
+          { value: "heading4", label: { en: "Heading 4" } },
+          { value: "heading5", label: { en: "Heading 5" } },
+          { value: "heading6", label: { en: "Heading 6" } },
+          { value: "link", label: { en: "Link" } },
+          { value: "list", label: { en: "List" } },
+        ],
+      },
+      defaultValue: "paragraph",
+    },
+
     // Styling Properties
     textColor: {
       label: {
@@ -198,27 +219,6 @@ export default {
         unitChoices: [{ value: "px", label: "px", min: 0, max: 100 }],
       },
       defaultValue: "0px",
-    },
-
-    // Per-element styling: pick a target, then only that target's controls show
-    styleTarget: {
-      label: { en: "Style Element" },
-      type: "TextSelect",
-      section: "style",
-      options: {
-        options: [
-          { value: "paragraph", label: { en: "Paragraph" } },
-          { value: "heading1", label: { en: "Heading 1" } },
-          { value: "heading2", label: { en: "Heading 2" } },
-          { value: "heading3", label: { en: "Heading 3" } },
-          { value: "heading4", label: { en: "Heading 4" } },
-          { value: "heading5", label: { en: "Heading 5" } },
-          { value: "heading6", label: { en: "Heading 6" } },
-          { value: "link", label: { en: "Link" } },
-          { value: "list", label: { en: "List" } },
-        ],
-      },
-      defaultValue: "paragraph",
     },
 
     paragraphColor: {
