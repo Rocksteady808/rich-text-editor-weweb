@@ -195,37 +195,34 @@ export default {
       defaultValue: "0px",
     },
 
-    // Heading Styling
-    headingColor: {
-      label: { en: "Heading Color" },
-      type: "Color",
-      section: "style",
-      bindable: true,
-      responsive: true,
-    },
-    headingFontSize: {
-      label: { en: "Heading Font Size" },
-      type: "Length",
+    // Per-element styling: pick a target, then only that target's controls show
+    styleTarget: {
+      label: { en: "Style Element" },
+      type: "TextSelect",
       section: "style",
       options: {
-        unitChoices: [{ value: "px", label: "px", min: 8, max: 120 }],
+        options: [
+          { value: "paragraph", label: { en: "Paragraph" } },
+          { value: "heading1", label: { en: "Heading 1" } },
+          { value: "heading2", label: { en: "Heading 2" } },
+          { value: "heading3", label: { en: "Heading 3" } },
+          { value: "heading4", label: { en: "Heading 4" } },
+          { value: "heading5", label: { en: "Heading 5" } },
+          { value: "heading6", label: { en: "Heading 6" } },
+          { value: "link", label: { en: "Link" } },
+          { value: "list", label: { en: "List" } },
+        ],
       },
-      responsive: true,
-    },
-    headingFontFamily: {
-      label: { en: "Heading Font Family" },
-      type: "FontFamily",
-      section: "style",
-      responsive: true,
+      defaultValue: "paragraph",
     },
 
-    // Paragraph Styling
     paragraphColor: {
       label: { en: "Paragraph Color" },
       type: "Color",
       section: "style",
       bindable: true,
       responsive: true,
+      hidden: (content) => content.styleTarget !== "paragraph",
     },
     paragraphFontSize: {
       label: { en: "Paragraph Font Size" },
@@ -235,21 +232,179 @@ export default {
         unitChoices: [{ value: "px", label: "px", min: 8, max: 100 }],
       },
       responsive: true,
+      hidden: (content) => content.styleTarget !== "paragraph",
     },
     paragraphFontFamily: {
       label: { en: "Paragraph Font Family" },
       type: "FontFamily",
       section: "style",
       responsive: true,
+      hidden: (content) => content.styleTarget !== "paragraph",
     },
 
-    // Link Styling
+    heading1Color: {
+      label: { en: "Heading 1 Color" },
+      type: "Color",
+      section: "style",
+      bindable: true,
+      responsive: true,
+      hidden: (content) => content.styleTarget !== "heading1",
+    },
+    heading1FontSize: {
+      label: { en: "Heading 1 Font Size" },
+      type: "Length",
+      section: "style",
+      options: {
+        unitChoices: [{ value: "px", label: "px", min: 8, max: 120 }],
+      },
+      responsive: true,
+      hidden: (content) => content.styleTarget !== "heading1",
+    },
+    heading1FontFamily: {
+      label: { en: "Heading 1 Font Family" },
+      type: "FontFamily",
+      section: "style",
+      responsive: true,
+      hidden: (content) => content.styleTarget !== "heading1",
+    },
+
+    heading2Color: {
+      label: { en: "Heading 2 Color" },
+      type: "Color",
+      section: "style",
+      bindable: true,
+      responsive: true,
+      hidden: (content) => content.styleTarget !== "heading2",
+    },
+    heading2FontSize: {
+      label: { en: "Heading 2 Font Size" },
+      type: "Length",
+      section: "style",
+      options: {
+        unitChoices: [{ value: "px", label: "px", min: 8, max: 120 }],
+      },
+      responsive: true,
+      hidden: (content) => content.styleTarget !== "heading2",
+    },
+    heading2FontFamily: {
+      label: { en: "Heading 2 Font Family" },
+      type: "FontFamily",
+      section: "style",
+      responsive: true,
+      hidden: (content) => content.styleTarget !== "heading2",
+    },
+
+    heading3Color: {
+      label: { en: "Heading 3 Color" },
+      type: "Color",
+      section: "style",
+      bindable: true,
+      responsive: true,
+      hidden: (content) => content.styleTarget !== "heading3",
+    },
+    heading3FontSize: {
+      label: { en: "Heading 3 Font Size" },
+      type: "Length",
+      section: "style",
+      options: {
+        unitChoices: [{ value: "px", label: "px", min: 8, max: 120 }],
+      },
+      responsive: true,
+      hidden: (content) => content.styleTarget !== "heading3",
+    },
+    heading3FontFamily: {
+      label: { en: "Heading 3 Font Family" },
+      type: "FontFamily",
+      section: "style",
+      responsive: true,
+      hidden: (content) => content.styleTarget !== "heading3",
+    },
+
+    heading4Color: {
+      label: { en: "Heading 4 Color" },
+      type: "Color",
+      section: "style",
+      bindable: true,
+      responsive: true,
+      hidden: (content) => content.styleTarget !== "heading4",
+    },
+    heading4FontSize: {
+      label: { en: "Heading 4 Font Size" },
+      type: "Length",
+      section: "style",
+      options: {
+        unitChoices: [{ value: "px", label: "px", min: 8, max: 120 }],
+      },
+      responsive: true,
+      hidden: (content) => content.styleTarget !== "heading4",
+    },
+    heading4FontFamily: {
+      label: { en: "Heading 4 Font Family" },
+      type: "FontFamily",
+      section: "style",
+      responsive: true,
+      hidden: (content) => content.styleTarget !== "heading4",
+    },
+
+    heading5Color: {
+      label: { en: "Heading 5 Color" },
+      type: "Color",
+      section: "style",
+      bindable: true,
+      responsive: true,
+      hidden: (content) => content.styleTarget !== "heading5",
+    },
+    heading5FontSize: {
+      label: { en: "Heading 5 Font Size" },
+      type: "Length",
+      section: "style",
+      options: {
+        unitChoices: [{ value: "px", label: "px", min: 8, max: 120 }],
+      },
+      responsive: true,
+      hidden: (content) => content.styleTarget !== "heading5",
+    },
+    heading5FontFamily: {
+      label: { en: "Heading 5 Font Family" },
+      type: "FontFamily",
+      section: "style",
+      responsive: true,
+      hidden: (content) => content.styleTarget !== "heading5",
+    },
+
+    heading6Color: {
+      label: { en: "Heading 6 Color" },
+      type: "Color",
+      section: "style",
+      bindable: true,
+      responsive: true,
+      hidden: (content) => content.styleTarget !== "heading6",
+    },
+    heading6FontSize: {
+      label: { en: "Heading 6 Font Size" },
+      type: "Length",
+      section: "style",
+      options: {
+        unitChoices: [{ value: "px", label: "px", min: 8, max: 120 }],
+      },
+      responsive: true,
+      hidden: (content) => content.styleTarget !== "heading6",
+    },
+    heading6FontFamily: {
+      label: { en: "Heading 6 Font Family" },
+      type: "FontFamily",
+      section: "style",
+      responsive: true,
+      hidden: (content) => content.styleTarget !== "heading6",
+    },
+
     linkColor: {
       label: { en: "Link Color" },
       type: "Color",
       section: "style",
       bindable: true,
       responsive: true,
+      hidden: (content) => content.styleTarget !== "link",
     },
     linkFontSize: {
       label: { en: "Link Font Size" },
@@ -259,21 +414,23 @@ export default {
         unitChoices: [{ value: "px", label: "px", min: 8, max: 100 }],
       },
       responsive: true,
+      hidden: (content) => content.styleTarget !== "link",
     },
     linkUnderline: {
       label: { en: "Underline Links" },
       type: "OnOff",
       section: "style",
       defaultValue: true,
+      hidden: (content) => content.styleTarget !== "link",
     },
 
-    // List Styling
     listColor: {
       label: { en: "List Color" },
       type: "Color",
       section: "style",
       bindable: true,
       responsive: true,
+      hidden: (content) => content.styleTarget !== "list",
     },
     listFontSize: {
       label: { en: "List Font Size" },
@@ -283,12 +440,14 @@ export default {
         unitChoices: [{ value: "px", label: "px", min: 8, max: 100 }],
       },
       responsive: true,
+      hidden: (content) => content.styleTarget !== "list",
     },
     listFontFamily: {
       label: { en: "List Font Family" },
       type: "FontFamily",
       section: "style",
       responsive: true,
+      hidden: (content) => content.styleTarget !== "list",
     },
   },
 };

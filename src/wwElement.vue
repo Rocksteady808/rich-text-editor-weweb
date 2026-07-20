@@ -126,9 +126,24 @@ export default {
         '--border': this.content.showBorder
           ? `${this.content.borderWidth || '1px'} ${this.content.borderStyle || 'solid'} ${this.content.borderColor || '#ddd'}`
           : 'none',
-        '--heading-color': this.content.headingColor || this.content.textColor || '#000000',
-        '--heading-font-size': this.content.headingFontSize || undefined,
-        '--heading-font-family': this.content.headingFontFamily || this.content.fontFamily || 'inherit',
+        '--heading1-color': this.content.heading1Color || this.content.textColor || '#000000',
+        '--heading1-font-size': this.content.heading1FontSize || undefined,
+        '--heading1-font-family': this.content.heading1FontFamily || this.content.fontFamily || 'inherit',
+        '--heading2-color': this.content.heading2Color || this.content.textColor || '#000000',
+        '--heading2-font-size': this.content.heading2FontSize || undefined,
+        '--heading2-font-family': this.content.heading2FontFamily || this.content.fontFamily || 'inherit',
+        '--heading3-color': this.content.heading3Color || this.content.textColor || '#000000',
+        '--heading3-font-size': this.content.heading3FontSize || undefined,
+        '--heading3-font-family': this.content.heading3FontFamily || this.content.fontFamily || 'inherit',
+        '--heading4-color': this.content.heading4Color || this.content.textColor || '#000000',
+        '--heading4-font-size': this.content.heading4FontSize || undefined,
+        '--heading4-font-family': this.content.heading4FontFamily || this.content.fontFamily || 'inherit',
+        '--heading5-color': this.content.heading5Color || this.content.textColor || '#000000',
+        '--heading5-font-size': this.content.heading5FontSize || undefined,
+        '--heading5-font-family': this.content.heading5FontFamily || this.content.fontFamily || 'inherit',
+        '--heading6-color': this.content.heading6Color || this.content.textColor || '#000000',
+        '--heading6-font-size': this.content.heading6FontSize || undefined,
+        '--heading6-font-family': this.content.heading6FontFamily || this.content.fontFamily || 'inherit',
         '--paragraph-color': this.content.paragraphColor || this.content.textColor || '#000000',
         '--paragraph-font-size': this.content.paragraphFontSize || this.content.fontSize || '16px',
         '--paragraph-font-family': this.content.paragraphFontFamily || this.content.fontFamily || 'inherit',
@@ -346,16 +361,38 @@ export default {
     margin: 0.75em 0 0.5em 0;
     font-weight: 600;
     line-height: 1.3;
-    color: var(--heading-color);
-    font-family: var(--heading-font-family);
   }
 
-  h1 { font-size: var(--heading-font-size, 2em); }
-  h2 { font-size: var(--heading-font-size, 1.5em); }
-  h3 { font-size: var(--heading-font-size, 1.25em); }
-  h4 { font-size: var(--heading-font-size, 1.1em); }
-  h5 { font-size: var(--heading-font-size, 1em); }
-  h6 { font-size: var(--heading-font-size, 0.9em); }
+  h1 {
+    font-size: var(--heading1-font-size, 2em);
+    color: var(--heading1-color);
+    font-family: var(--heading1-font-family);
+  }
+  h2 {
+    font-size: var(--heading2-font-size, 1.5em);
+    color: var(--heading2-color);
+    font-family: var(--heading2-font-family);
+  }
+  h3 {
+    font-size: var(--heading3-font-size, 1.25em);
+    color: var(--heading3-color);
+    font-family: var(--heading3-font-family);
+  }
+  h4 {
+    font-size: var(--heading4-font-size, 1.1em);
+    color: var(--heading4-color);
+    font-family: var(--heading4-font-family);
+  }
+  h5 {
+    font-size: var(--heading5-font-size, 1em);
+    color: var(--heading5-color);
+    font-family: var(--heading5-font-family);
+  }
+  h6 {
+    font-size: var(--heading6-font-size, 0.9em);
+    color: var(--heading6-color);
+    font-family: var(--heading6-font-family);
+  }
 
   p {
     margin: 0.5em 0;
