@@ -11,6 +11,8 @@
         <button type="button" class="rte-btn" @click="insertUnderline" title="Underline"><u>U</u></button>
         <span class="rte-divider"></span>
         <button type="button" class="rte-btn" @click="insertLink" title="Link to URL">Link</button>
+        <button type="button" class="rte-btn" @click="insertEmailLink" title="Link to email address">Email</button>
+        <button type="button" class="rte-btn" @click="insertPhoneLink" title="Link to phone number">Phone</button>
         <select
           class="rte-select"
           title="Link to a page"
@@ -239,6 +241,19 @@ export default {
     insertPageLink(path) {
       if (!path) return;
       this.wrapSelection(`<a href="${path}">`, '</a>');
+    },
+    insertEmailLink() {
+      const win = wwLib.getFrontWindow();
+      const email = win.prompt('Email address');
+      if (!email || !email.trim()) return;
+      this.wrapSelection(`<a href="mailto:${email.trim()}">`, '</a>');
+    },
+    insertPhoneLink() {
+      const win = wwLib.getFrontWindow();
+      const phone = win.prompt('Phone number');
+      if (!phone || !phone.trim()) return;
+      const cleaned = phone.trim().replace(/[^0-9+]/g, '');
+      this.wrapSelection(`<a href="tel:${cleaned}">`, '</a>');
     },
     insertImage() {
       const win = wwLib.getFrontWindow();
