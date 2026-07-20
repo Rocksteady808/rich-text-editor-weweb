@@ -76,8 +76,13 @@ export default {
       type: "Length",
       section: "style",
       options: {
-        unitChoices: [{ value: "px", label: "px", min: 8, max: 100 }],
+        unitChoices: [
+          { value: "px", label: "px", min: 8, max: 100 },
+          { value: "rem", label: "rem", min: 0.5, max: 6 },
+          { value: "em", label: "em", min: 0.5, max: 6 },
+        ],
       },
+      defaultValue: "16px",
       responsive: true,
     },
     fontFamily: {
@@ -229,8 +234,13 @@ export default {
       type: "Length",
       section: "style",
       options: {
-        unitChoices: [{ value: "px", label: "px", min: 8, max: 100 }],
+        unitChoices: [
+          { value: "px", label: "px", min: 8, max: 100 },
+          { value: "rem", label: "rem", min: 0.5, max: 6 },
+          { value: "em", label: "em", min: 0.5, max: 6 },
+        ],
       },
+      defaultValue: "16px",
       responsive: true,
       hidden: (content) => content.styleTarget !== "paragraph",
     },
@@ -255,8 +265,13 @@ export default {
       type: "Length",
       section: "style",
       options: {
-        unitChoices: [{ value: "px", label: "px", min: 8, max: 120 }],
+        unitChoices: [
+          { value: "px", label: "px", min: 8, max: 120 },
+          { value: "rem", label: "rem", min: 0.5, max: 8 },
+          { value: "em", label: "em", min: 0.5, max: 8 },
+        ],
       },
+      defaultValue: "32px",
       responsive: true,
       hidden: (content) => content.styleTarget !== "heading1",
     },
@@ -281,8 +296,13 @@ export default {
       type: "Length",
       section: "style",
       options: {
-        unitChoices: [{ value: "px", label: "px", min: 8, max: 120 }],
+        unitChoices: [
+          { value: "px", label: "px", min: 8, max: 120 },
+          { value: "rem", label: "rem", min: 0.5, max: 8 },
+          { value: "em", label: "em", min: 0.5, max: 8 },
+        ],
       },
+      defaultValue: "24px",
       responsive: true,
       hidden: (content) => content.styleTarget !== "heading2",
     },
@@ -307,8 +327,13 @@ export default {
       type: "Length",
       section: "style",
       options: {
-        unitChoices: [{ value: "px", label: "px", min: 8, max: 120 }],
+        unitChoices: [
+          { value: "px", label: "px", min: 8, max: 120 },
+          { value: "rem", label: "rem", min: 0.5, max: 8 },
+          { value: "em", label: "em", min: 0.5, max: 8 },
+        ],
       },
+      defaultValue: "20px",
       responsive: true,
       hidden: (content) => content.styleTarget !== "heading3",
     },
@@ -333,8 +358,13 @@ export default {
       type: "Length",
       section: "style",
       options: {
-        unitChoices: [{ value: "px", label: "px", min: 8, max: 120 }],
+        unitChoices: [
+          { value: "px", label: "px", min: 8, max: 120 },
+          { value: "rem", label: "rem", min: 0.5, max: 8 },
+          { value: "em", label: "em", min: 0.5, max: 8 },
+        ],
       },
+      defaultValue: "18px",
       responsive: true,
       hidden: (content) => content.styleTarget !== "heading4",
     },
@@ -359,8 +389,13 @@ export default {
       type: "Length",
       section: "style",
       options: {
-        unitChoices: [{ value: "px", label: "px", min: 8, max: 120 }],
+        unitChoices: [
+          { value: "px", label: "px", min: 8, max: 120 },
+          { value: "rem", label: "rem", min: 0.5, max: 8 },
+          { value: "em", label: "em", min: 0.5, max: 8 },
+        ],
       },
+      defaultValue: "16px",
       responsive: true,
       hidden: (content) => content.styleTarget !== "heading5",
     },
@@ -385,8 +420,13 @@ export default {
       type: "Length",
       section: "style",
       options: {
-        unitChoices: [{ value: "px", label: "px", min: 8, max: 120 }],
+        unitChoices: [
+          { value: "px", label: "px", min: 8, max: 120 },
+          { value: "rem", label: "rem", min: 0.5, max: 8 },
+          { value: "em", label: "em", min: 0.5, max: 8 },
+        ],
       },
+      defaultValue: "14px",
       responsive: true,
       hidden: (content) => content.styleTarget !== "heading6",
     },
@@ -411,8 +451,13 @@ export default {
       type: "Length",
       section: "style",
       options: {
-        unitChoices: [{ value: "px", label: "px", min: 8, max: 100 }],
+        unitChoices: [
+          { value: "px", label: "px", min: 8, max: 100 },
+          { value: "rem", label: "rem", min: 0.5, max: 6 },
+          { value: "em", label: "em", min: 0.5, max: 6 },
+        ],
       },
+      defaultValue: "16px",
       responsive: true,
       hidden: (content) => content.styleTarget !== "link",
     },
@@ -437,8 +482,13 @@ export default {
       type: "Length",
       section: "style",
       options: {
-        unitChoices: [{ value: "px", label: "px", min: 8, max: 100 }],
+        unitChoices: [
+          { value: "px", label: "px", min: 8, max: 100 },
+          { value: "rem", label: "rem", min: 0.5, max: 6 },
+          { value: "em", label: "em", min: 0.5, max: 6 },
+        ],
       },
+      defaultValue: "16px",
       responsive: true,
       hidden: (content) => content.styleTarget !== "list",
     },
