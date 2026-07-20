@@ -122,10 +122,15 @@ export default {
       section: "style",
       options: {
         unitChoices: [
-          { value: "px", label: "px", min: 0, max: 100 },
           { value: "auto", label: "auto" },
+          { value: "px", label: "px", min: 0, max: 100 },
+          { value: "%", label: "%", min: 0, max: 300 },
+          { value: "em", label: "em", min: 0, max: 6 },
+          { value: "rem", label: "rem", min: 0, max: 6 },
+          { value: "none", label: "none" },
         ],
       },
+      defaultValue: "auto",
       responsive: true,
     },
     textAlign: {
