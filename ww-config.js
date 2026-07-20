@@ -15,6 +15,50 @@ export default {
       defaultValue: "<p>Type or paste your content in the HTML Source box above, or use the toolbar buttons.</p>",
       section: "settings",
     },
+    pages: {
+      label: {
+        en: "Pages (for Link dropdown)",
+      },
+      type: "Array",
+      section: "settings",
+      bindable: true,
+      options: {
+        expandable: true,
+        getItemLabel(item) {
+          return item?.name || "Page";
+        },
+        item: {
+          type: "Object",
+          defaultValue: { name: "New Page", path: "/" },
+          options: {
+            item: {
+              name: {
+                label: { en: "Name" },
+                type: "Text",
+              },
+              path: {
+                label: { en: "Path" },
+                type: "Text",
+              },
+            },
+          },
+        },
+      },
+      defaultValue: [
+        { name: "Home", path: "/home" },
+        { name: "Papers", path: "/papers" },
+        { name: "Tips", path: "/tips" },
+        { name: "Cones", path: "/cones" },
+        { name: "Accessories", path: "/accessories" },
+        { name: "Lifestyle", path: "/lifestyle" },
+        { name: "Distributors", path: "/distributors" },
+        { name: "Medical Marijuana", path: "/medical-marijuana" },
+        { name: "Brand Protection", path: "/brand-protection" },
+        { name: "Privacy Policy", path: "/privacy-policy" },
+        { name: "California Proposition 65 Warning", path: "/california-proposition-65-warning" },
+      ],
+    },
+
     // Styling Properties
     textColor: {
       label: {

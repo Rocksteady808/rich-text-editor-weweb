@@ -10,7 +10,16 @@
         <button type="button" class="rte-btn" @click="insertItalic" title="Italic"><em>I</em></button>
         <button type="button" class="rte-btn" @click="insertUnderline" title="Underline"><u>U</u></button>
         <span class="rte-divider"></span>
-        <button type="button" class="rte-btn" @click="insertLink" title="Link">Link</button>
+        <button type="button" class="rte-btn" @click="insertLink" title="Link to URL">Link</button>
+        <select
+          class="rte-select"
+          title="Link to a page"
+          :value="''"
+          @change="insertPageLink($event.target.value); $event.target.value = ''"
+        >
+          <option value="" disabled>Link to page…</option>
+          <option v-for="(page, index) in pages" :key="index" :value="page.path">{{ page.name }}</option>
+        </select>
         <button type="button" class="rte-btn" @click="insertBulletList" title="Bullet list">&bull; List</button>
         <button type="button" class="rte-btn" @click="insertNumberedList" title="Numbered list">1. List</button>
         <button type="button" class="rte-btn" @click="insertImage" title="Image">Image</button>
@@ -53,6 +62,9 @@ export default {
       result = !!this.wwEditorState?.isEditing;
       /* wwEditor:end */
       return result;
+    },
+    pages() {
+      return this.content?.pages || [];
     },
     contentStyle() {
       return {
@@ -131,6 +143,10 @@ export default {
       if (!url || !url.trim() || url.trim().toLowerCase().startsWith('javascript:')) return;
       this.wrapSelection(`<a href="${url.trim()}" target="_blank" rel="noopener noreferrer">`, '</a>');
     },
+    insertPageLink(path) {
+      if (!path) return;
+      this.wrapSelection(`<a href="${path}">`, '</a>');
+    },
     insertImage() {
       const win = wwLib.getFrontWindow();
       const url = win.prompt('Image URL');
@@ -191,6 +207,16 @@ export default {
   &:hover {
     background: #eee;
   }
+}
+
+.rte-select {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 4px 6px;
+  font-size: 13px;
+  cursor: pointer;
+  max-width: 140px;
 }
 
 .rte-divider {
