@@ -33,6 +33,7 @@
         :value="content.text"
         placeholder="Type or paste HTML here..."
         @input="handleInput"
+        @paste="handlePaste"
       ></textarea>
       <label class="rte-label">Preview</label>
     </template>
@@ -45,6 +46,45 @@
 </template>
 
 <script>
+const ALLOWED_PASTE_TAGS = [
+  'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
+  'p', 'strong', 'b', 'em', 'i', 'u', 's', 'a',
+  'ul', 'ol', 'li', 'blockquote',
+];
+
+function cleanPastedHtml(html, doc) {
+  const container = doc.createElement('div');
+  container.innerHTML = html;
+
+  const stripNode = (node) => {
+    Array.from(node.childNodes).forEach((child) => {
+      if (child.nodeType !== 1) return;
+
+      const tag = child.tagName.toLowerCase();
+      if (!ALLOWED_PASTE_TAGS.includes(tag)) {
+        while (child.firstChild) {
+          node.insertBefore(child.firstChild, child);
+        }
+        node.removeChild(child);
+        stripNode(node);
+        return;
+      }
+
+      child.removeAttribute('style');
+      child.removeAttribute('class');
+      if (tag === 'a' && child.hasAttribute('href') && child.getAttribute('href').trim().toLowerCase().startsWith('javascript:')) {
+        child.removeAttribute('href');
+      } else if (tag !== 'a') {
+        child.removeAttribute('href');
+      }
+      stripNode(child);
+    });
+  };
+
+  stripNode(container);
+  return container.innerHTML.trim();
+}
+
 export default {
   name: 'RichTextDisplay',
   props: {
@@ -85,6 +125,15 @@ export default {
   methods: {
     handleInput(event) {
       this.$emit('update:content', { text: event.target.value });
+    },
+    handlePaste(event) {
+      const html = event.clipboardData?.getData('text/html');
+      if (!html) return;
+
+      event.preventDefault();
+      const doc = wwLib.getFrontWindow().document;
+      const cleaned = cleanPastedHtml(html, doc);
+      this.insertAtCursor(cleaned);
     },
     wrapSelection(before, after) {
       const textarea = this.$refs.textarea;
