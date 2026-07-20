@@ -1,5 +1,5 @@
 <template>
-  <div class="rich-text-display">
+  <div class="rich-text-display" data-capture>
     <template v-if="isEditing">
       <div class="rich-text-display__toolbar">
         <button type="button" class="rte-btn" @click="insertHeading(1)" title="Heading 1">H1</button>
@@ -24,17 +24,6 @@
         :value="content.text"
         placeholder="Type or paste HTML here..."
         @input="handleInput"
-        @mousedown.stop="() => {}"
-        @mousemove.stop="() => {}"
-        @mouseup.stop="() => {}"
-        @click.stop="() => {}"
-        @dragstart.stop.prevent="() => {}"
-        @keydown.stop="() => {}"
-        @keyup.stop="() => {}"
-        @keypress.stop="() => {}"
-        @keydown.capture.stop="() => {}"
-        @keyup.capture.stop="() => {}"
-        @mousedown.capture.stop="() => {}"
       ></textarea>
       <label class="rte-label">Preview</label>
     </template>
