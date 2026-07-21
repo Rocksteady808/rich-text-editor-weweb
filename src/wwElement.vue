@@ -79,6 +79,7 @@
       draggable="false"
       @input="handleInput"
       @paste="handlePaste"
+      @mousedown="handleMouseDown"
       @mouseup="captureSelection"
       @keyup="captureSelection"
       @dragstart.prevent
@@ -308,6 +309,33 @@ export default {
       if (selection && selection.rangeCount > 0) {
         this.savedRange = selection.getRangeAt(0).cloneRange();
       }
+    },
+    handleMouseDown(event) {
+      // If mousedown lands inside an existing (non-collapsed) text selection,
+      // browsers start a native "drag this selected text" gesture instead of
+      // starting a new selection - which visually looks like the component
+      // itself is being dragged. Collapse the old selection to the click
+      // point first so the following drag always starts a fresh selection.
+      const win = wwLib.getFrontWindow();
+      const selection = win.getSelection();
+      if (!selection || selection.isCollapsed) return;
+
+      const doc = win.document;
+      let range = null;
+      if (doc.caretRangeFromPoint) {
+        range = doc.caretRangeFromPoint(event.clientX, event.clientY);
+      } else if (doc.caretPositionFromPoint) {
+        const pos = doc.caretPositionFromPoint(event.clientX, event.clientY);
+        if (pos) {
+          range = doc.createRange();
+          range.setStart(pos.offsetNode, pos.offset);
+          range.collapse(true);
+        }
+      }
+      if (!range) return;
+
+      selection.removeAllRanges();
+      selection.addRange(range);
     },
     restoreSelection() {
       const editor = this.$refs.editor;
