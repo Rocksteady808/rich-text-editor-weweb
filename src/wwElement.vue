@@ -5,6 +5,9 @@
         v-if="bubbleMenu.visible"
         class="rich-text-display__toolbar rich-text-display__toolbar--floating"
         :style="{ top: bubbleMenu.top + 'px', left: bubbleMenu.left + 'px' }"
+        @mousedown.stop
+        @mousemove.stop
+        @dragstart.prevent
       >
         <button type="button" class="rte-btn" @mousedown.prevent @click="insertHeading(1)" title="Heading 1">H1</button>
         <button type="button" class="rte-btn" @mousedown.prevent @click="insertHeading(2)" title="Heading 2">H2</button>
