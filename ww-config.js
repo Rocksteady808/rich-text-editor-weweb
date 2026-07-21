@@ -378,6 +378,24 @@ export default {
       },
       hidden: (content) => content.styleTarget !== "paragraph",
     },
+    paragraphLineHeight: {
+      label: { en: "Paragraph Line Height" },
+      type: "Length",
+      section: "style",
+      options: {
+        unitChoices: [
+          { value: "auto", label: "auto" },
+          { value: "px", label: "px", min: 0, max: 100 },
+          { value: "%", label: "%", min: 0, max: 300 },
+          { value: "em", label: "em", min: 0, max: 6 },
+          { value: "rem", label: "rem", min: 0, max: 6 },
+          { value: "none", label: "none" },
+        ],
+      },
+      defaultValue: "auto",
+      responsive: true,
+      hidden: (content) => content.styleTarget !== "paragraph",
+    },
 
     heading1Color: {
       label: { en: "Heading 1 Color" },
@@ -424,6 +442,25 @@ export default {
           { value: "800", label: { en: "Extra Bold" } },
         ],
       },
+      hidden: (content) => content.styleTarget !== "heading1",
+    },
+
+    heading1LineHeight: {
+      label: { en: "Heading 1 Line Height" },
+      type: "Length",
+      section: "style",
+      options: {
+        unitChoices: [
+          { value: "auto", label: "auto" },
+          { value: "px", label: "px", min: 0, max: 100 },
+          { value: "%", label: "%", min: 0, max: 300 },
+          { value: "em", label: "em", min: 0, max: 6 },
+          { value: "rem", label: "rem", min: 0, max: 6 },
+          { value: "none", label: "none" },
+        ],
+      },
+      defaultValue: "auto",
+      responsive: true,
       hidden: (content) => content.styleTarget !== "heading1",
     },
 
@@ -475,6 +512,25 @@ export default {
       hidden: (content) => content.styleTarget !== "heading2",
     },
 
+    heading2LineHeight: {
+      label: { en: "Heading 2 Line Height" },
+      type: "Length",
+      section: "style",
+      options: {
+        unitChoices: [
+          { value: "auto", label: "auto" },
+          { value: "px", label: "px", min: 0, max: 100 },
+          { value: "%", label: "%", min: 0, max: 300 },
+          { value: "em", label: "em", min: 0, max: 6 },
+          { value: "rem", label: "rem", min: 0, max: 6 },
+          { value: "none", label: "none" },
+        ],
+      },
+      defaultValue: "auto",
+      responsive: true,
+      hidden: (content) => content.styleTarget !== "heading2",
+    },
+
     heading3Color: {
       label: { en: "Heading 3 Color" },
       type: "Color",
@@ -520,6 +576,25 @@ export default {
           { value: "800", label: { en: "Extra Bold" } },
         ],
       },
+      hidden: (content) => content.styleTarget !== "heading3",
+    },
+
+    heading3LineHeight: {
+      label: { en: "Heading 3 Line Height" },
+      type: "Length",
+      section: "style",
+      options: {
+        unitChoices: [
+          { value: "auto", label: "auto" },
+          { value: "px", label: "px", min: 0, max: 100 },
+          { value: "%", label: "%", min: 0, max: 300 },
+          { value: "em", label: "em", min: 0, max: 6 },
+          { value: "rem", label: "rem", min: 0, max: 6 },
+          { value: "none", label: "none" },
+        ],
+      },
+      defaultValue: "auto",
+      responsive: true,
       hidden: (content) => content.styleTarget !== "heading3",
     },
 
@@ -571,6 +646,25 @@ export default {
       hidden: (content) => content.styleTarget !== "heading4",
     },
 
+    heading4LineHeight: {
+      label: { en: "Heading 4 Line Height" },
+      type: "Length",
+      section: "style",
+      options: {
+        unitChoices: [
+          { value: "auto", label: "auto" },
+          { value: "px", label: "px", min: 0, max: 100 },
+          { value: "%", label: "%", min: 0, max: 300 },
+          { value: "em", label: "em", min: 0, max: 6 },
+          { value: "rem", label: "rem", min: 0, max: 6 },
+          { value: "none", label: "none" },
+        ],
+      },
+      defaultValue: "auto",
+      responsive: true,
+      hidden: (content) => content.styleTarget !== "heading4",
+    },
+
     heading5Color: {
       label: { en: "Heading 5 Color" },
       type: "Color",
@@ -619,6 +713,25 @@ export default {
       hidden: (content) => content.styleTarget !== "heading5",
     },
 
+    heading5LineHeight: {
+      label: { en: "Heading 5 Line Height" },
+      type: "Length",
+      section: "style",
+      options: {
+        unitChoices: [
+          { value: "auto", label: "auto" },
+          { value: "px", label: "px", min: 0, max: 100 },
+          { value: "%", label: "%", min: 0, max: 300 },
+          { value: "em", label: "em", min: 0, max: 6 },
+          { value: "rem", label: "rem", min: 0, max: 6 },
+          { value: "none", label: "none" },
+        ],
+      },
+      defaultValue: "auto",
+      responsive: true,
+      hidden: (content) => content.styleTarget !== "heading5",
+    },
+
     heading6Color: {
       label: { en: "Heading 6 Color" },
       type: "Color",
@@ -664,6 +777,25 @@ export default {
           { value: "800", label: { en: "Extra Bold" } },
         ],
       },
+      hidden: (content) => content.styleTarget !== "heading6",
+    },
+
+    heading6LineHeight: {
+      label: { en: "Heading 6 Line Height" },
+      type: "Length",
+      section: "style",
+      options: {
+        unitChoices: [
+          { value: "auto", label: "auto" },
+          { value: "px", label: "px", min: 0, max: 100 },
+          { value: "%", label: "%", min: 0, max: 300 },
+          { value: "em", label: "em", min: 0, max: 6 },
+          { value: "rem", label: "rem", min: 0, max: 6 },
+          { value: "none", label: "none" },
+        ],
+      },
+      defaultValue: "auto",
+      responsive: true,
       hidden: (content) => content.styleTarget !== "heading6",
     },
 
@@ -760,6 +892,25 @@ export default {
           { value: "800", label: { en: "Extra Bold" } },
         ],
       },
+      hidden: (content) => content.styleTarget !== "list",
+    },
+
+    listLineHeight: {
+      label: { en: "List Line Height" },
+      type: "Length",
+      section: "style",
+      options: {
+        unitChoices: [
+          { value: "auto", label: "auto" },
+          { value: "px", label: "px", min: 0, max: 100 },
+          { value: "%", label: "%", min: 0, max: 300 },
+          { value: "em", label: "em", min: 0, max: 6 },
+          { value: "rem", label: "rem", min: 0, max: 6 },
+          { value: "none", label: "none" },
+        ],
+      },
+      defaultValue: "auto",
+      responsive: true,
       hidden: (content) => content.styleTarget !== "list",
     },
   },

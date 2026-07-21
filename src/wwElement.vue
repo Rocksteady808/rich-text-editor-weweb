@@ -191,30 +191,37 @@ export default {
         '--heading1-font-size': this.content.heading1FontSize || undefined,
         '--heading1-font-family': this.content.heading1FontFamily || this.content.fontFamily || 'inherit',
         '--heading1-font-weight': this.content.heading1FontWeight || undefined,
+        '--heading1-line-height': this.content.heading1LineHeight || undefined,
         '--heading2-color': this.content.heading2Color || this.content.textColor || '#000000',
         '--heading2-font-size': this.content.heading2FontSize || undefined,
         '--heading2-font-family': this.content.heading2FontFamily || this.content.fontFamily || 'inherit',
         '--heading2-font-weight': this.content.heading2FontWeight || undefined,
+        '--heading2-line-height': this.content.heading2LineHeight || undefined,
         '--heading3-color': this.content.heading3Color || this.content.textColor || '#000000',
         '--heading3-font-size': this.content.heading3FontSize || undefined,
         '--heading3-font-family': this.content.heading3FontFamily || this.content.fontFamily || 'inherit',
         '--heading3-font-weight': this.content.heading3FontWeight || undefined,
+        '--heading3-line-height': this.content.heading3LineHeight || undefined,
         '--heading4-color': this.content.heading4Color || this.content.textColor || '#000000',
         '--heading4-font-size': this.content.heading4FontSize || undefined,
         '--heading4-font-family': this.content.heading4FontFamily || this.content.fontFamily || 'inherit',
         '--heading4-font-weight': this.content.heading4FontWeight || undefined,
+        '--heading4-line-height': this.content.heading4LineHeight || undefined,
         '--heading5-color': this.content.heading5Color || this.content.textColor || '#000000',
         '--heading5-font-size': this.content.heading5FontSize || undefined,
         '--heading5-font-family': this.content.heading5FontFamily || this.content.fontFamily || 'inherit',
         '--heading5-font-weight': this.content.heading5FontWeight || undefined,
+        '--heading5-line-height': this.content.heading5LineHeight || undefined,
         '--heading6-color': this.content.heading6Color || this.content.textColor || '#000000',
         '--heading6-font-size': this.content.heading6FontSize || undefined,
         '--heading6-font-family': this.content.heading6FontFamily || this.content.fontFamily || 'inherit',
         '--heading6-font-weight': this.content.heading6FontWeight || undefined,
+        '--heading6-line-height': this.content.heading6LineHeight || undefined,
         '--paragraph-color': this.content.paragraphColor || this.content.textColor || '#000000',
         '--paragraph-font-size': this.content.paragraphFontSize || this.content.fontSize || '16px',
         '--paragraph-font-family': this.content.paragraphFontFamily || this.content.fontFamily || 'inherit',
         '--paragraph-font-weight': this.content.paragraphFontWeight || undefined,
+        '--paragraph-line-height': this.content.paragraphLineHeight || undefined,
         '--link-color': this.content.linkColor || '#007bff',
         '--link-font-size': this.content.linkFontSize || this.content.fontSize || '16px',
         '--link-text-decoration': this.content.linkUnderline === false ? 'none' : 'underline',
@@ -223,6 +230,7 @@ export default {
         '--list-font-size': this.content.listFontSize || this.content.fontSize || '16px',
         '--list-font-family': this.content.listFontFamily || this.content.fontFamily || 'inherit',
         '--list-font-weight': this.content.listFontWeight || undefined,
+        '--list-line-height': this.content.listLineHeight || undefined,
       };
     },
   },
@@ -553,36 +561,42 @@ export default {
     color: var(--heading1-color) !important;
     font-family: var(--heading1-font-family) !important;
     font-weight: var(--heading1-font-weight, 600) !important;
+    line-height: var(--heading1-line-height, 1.3) !important;
   }
   h2 {
     font-size: var(--heading2-font-size, 1.5em) !important;
     color: var(--heading2-color) !important;
     font-family: var(--heading2-font-family) !important;
     font-weight: var(--heading2-font-weight, 600) !important;
+    line-height: var(--heading2-line-height, 1.3) !important;
   }
   h3 {
     font-size: var(--heading3-font-size, 1.25em) !important;
     color: var(--heading3-color) !important;
     font-family: var(--heading3-font-family) !important;
     font-weight: var(--heading3-font-weight, 600) !important;
+    line-height: var(--heading3-line-height, 1.3) !important;
   }
   h4 {
     font-size: var(--heading4-font-size, 1.1em) !important;
     color: var(--heading4-color) !important;
     font-family: var(--heading4-font-family) !important;
     font-weight: var(--heading4-font-weight, 600) !important;
+    line-height: var(--heading4-line-height, 1.3) !important;
   }
   h5 {
     font-size: var(--heading5-font-size, 1em) !important;
     color: var(--heading5-color) !important;
     font-family: var(--heading5-font-family) !important;
     font-weight: var(--heading5-font-weight, 600) !important;
+    line-height: var(--heading5-line-height, 1.3) !important;
   }
   h6 {
     font-size: var(--heading6-font-size, 0.9em) !important;
     color: var(--heading6-color) !important;
     font-family: var(--heading6-font-family) !important;
     font-weight: var(--heading6-font-weight, 600) !important;
+    line-height: var(--heading6-line-height, 1.3) !important;
   }
 
   p {
@@ -591,6 +605,7 @@ export default {
     font-size: var(--paragraph-font-size) !important;
     font-family: var(--paragraph-font-family) !important;
     font-weight: var(--paragraph-font-weight, normal) !important;
+    line-height: var(--paragraph-line-height, var(--line-height)) !important;
   }
 
   ul, ol {
@@ -600,6 +615,7 @@ export default {
     font-size: var(--list-font-size) !important;
     font-family: var(--list-font-family) !important;
     font-weight: var(--list-font-weight, normal) !important;
+    line-height: var(--list-line-height, var(--line-height)) !important;
   }
 
   ul li, ol li {
