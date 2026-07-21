@@ -72,17 +72,73 @@ export default {
         },
       },
       defaultValue: [
-        { name: "Home", path: "/home", sections: [] },
-        { name: "Papers", path: "/papers", sections: [] },
-        { name: "Tips", path: "/tips", sections: [] },
-        { name: "Cones", path: "/cones", sections: [] },
-        { name: "Accessories", path: "/accessories", sections: [] },
-        { name: "Lifestyle", path: "/lifestyle", sections: [] },
-        { name: "Distributors", path: "/distributors", sections: [] },
-        { name: "Medical Marijuana", path: "/medical-marijuana", sections: [] },
-        { name: "Brand Protection", path: "/brand-protection", sections: [] },
-        { name: "Privacy Policy", path: "/privacy-policy", sections: [] },
-        { name: "California Proposition 65 Warning", path: "/california-proposition-65-warning", sections: [] },
+        {
+          name: "Home",
+          path: "/home",
+          sections: [
+            { name: "Hero Section", anchor: "1cbe2dc6-bdbe-4832-b41c-ee975db4042d" },
+            { name: "Content Slider", anchor: "8c3d8aa2-580e-49c3-af1b-fd7a27467dcd" },
+            { name: "Instagram Feed", anchor: "b2c2cf3c-7186-4991-b83d-bcef1bd94b05" },
+          ],
+        },
+        {
+          name: "Papers",
+          path: "/papers",
+          sections: [{ name: "Sub Header Section", anchor: "dbc155a3-c5d4-4eb1-8e02-5b819071b97e" }],
+        },
+        {
+          name: "Tips",
+          path: "/tips",
+          sections: [{ name: "Sub Header Section", anchor: "83c8e22c-9886-4922-8e24-4429de0111bf" }],
+        },
+        {
+          name: "Cones",
+          path: "/cones",
+          sections: [{ name: "Sub Header Section", anchor: "f0587d62-dbb9-46dd-a93d-8ba6fe5b319d" }],
+        },
+        {
+          name: "Accessories",
+          path: "/accessories",
+          sections: [{ name: "Sub Header Section", anchor: "ea62bc99-4223-4efd-9519-ac7cd4870724" }],
+        },
+        {
+          name: "Lifestyle",
+          path: "/lifestyle",
+          sections: [{ name: "Sub Header Section", anchor: "6b361ee4-8516-4ec6-9f84-9fbd680caa23" }],
+        },
+        {
+          name: "Distributors",
+          path: "/distributors",
+          sections: [{ name: "Distributor and Retailer Resources", anchor: "17ee3595-dbf2-43db-a870-9a61eb9a9812" }],
+        },
+        {
+          name: "Medical Marijuana",
+          path: "/medical-marijuana",
+          sections: [
+            { name: "An Ancient, Sacred Plant", anchor: "112b5990-92af-441f-bda0-03a351041037" },
+            { name: "Medicine, Then Prohibition", anchor: "b9115c45-fc89-49ae-b8eb-a68392381585" },
+            { name: "The Science Now", anchor: "020ae7d8-58d5-498c-a9d8-51477021c5d1" },
+            { name: "Where Things Stand", anchor: "ed3404e6-4465-48e2-9050-32adf5abd39c" },
+          ],
+        },
+        {
+          name: "Brand Protection",
+          path: "/brand-protection",
+          sections: [{ name: "Brand Protection", anchor: "20ae65da-bdcc-49b1-a024-5e13d35810c5" }],
+        },
+        {
+          name: "Privacy Policy",
+          path: "/privacy-policy",
+          sections: [{ name: "Privacy Policy Content", anchor: "34a33c2d-2c15-4592-94f0-d974361cb13b" }],
+        },
+        {
+          name: "California Proposition 65 Warning",
+          path: "/california-proposition-65-warning",
+          sections: [
+            { name: "Product Warnings", anchor: "86a44968-e2af-4778-b3de-eb51683792cd" },
+            { name: "Prop 65 Warning Details", anchor: "500b0f79-b6d2-4a9e-85e8-17571c09592b" },
+          ],
+        },
       ],
     },
 
