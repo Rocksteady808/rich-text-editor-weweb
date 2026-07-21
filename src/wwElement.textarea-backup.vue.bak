@@ -2,19 +2,19 @@
   <div class="rich-text-display" data-capture>
     <template v-if="isEditing">
       <div class="rich-text-display__toolbar">
-        <button type="button" class="rte-btn" @mousedown.prevent @click="insertHeading(1)" title="Heading 1">H1</button>
-        <button type="button" class="rte-btn" @mousedown.prevent @click="insertHeading(2)" title="Heading 2">H2</button>
-        <button type="button" class="rte-btn" @mousedown.prevent @click="insertHeading(3)" title="Heading 3">H3</button>
+        <button type="button" class="rte-btn" @click="insertHeading(1)" title="Heading 1">H1</button>
+        <button type="button" class="rte-btn" @click="insertHeading(2)" title="Heading 2">H2</button>
+        <button type="button" class="rte-btn" @click="insertHeading(3)" title="Heading 3">H3</button>
         <span class="rte-divider"></span>
-        <button type="button" class="rte-btn" @mousedown.prevent @click="insertBold" title="Bold"><strong>B</strong></button>
-        <button type="button" class="rte-btn" @mousedown.prevent @click="insertItalic" title="Italic"><em>I</em></button>
-        <button type="button" class="rte-btn" @mousedown.prevent @click="insertUnderline" title="Underline"><u>U</u></button>
+        <button type="button" class="rte-btn" @click="insertBold" title="Bold"><strong>B</strong></button>
+        <button type="button" class="rte-btn" @click="insertItalic" title="Italic"><em>I</em></button>
+        <button type="button" class="rte-btn" @click="insertUnderline" title="Underline"><u>U</u></button>
         <span class="rte-divider"></span>
-        <button type="button" class="rte-btn" @mousedown.prevent @click="openLinkModal" title="Insert link">Link</button>
-        <button type="button" class="rte-btn" @mousedown.prevent @click="insertBulletList" title="Bullet list">&bull; List</button>
-        <button type="button" class="rte-btn" @mousedown.prevent @click="insertNumberedList" title="Numbered list">1. List</button>
-        <button type="button" class="rte-btn" @mousedown.prevent @click="insertImage" title="Image">Image</button>
-        <button type="button" class="rte-btn" @mousedown.prevent @click="insertParagraph" title="Paragraph">P</button>
+        <button type="button" class="rte-btn" @click="openLinkModal" title="Insert link">Link</button>
+        <button type="button" class="rte-btn" @click="insertBulletList" title="Bullet list">&bull; List</button>
+        <button type="button" class="rte-btn" @click="insertNumberedList" title="Numbered list">1. List</button>
+        <button type="button" class="rte-btn" @click="insertImage" title="Image">Image</button>
+        <button type="button" class="rte-btn" @click="insertParagraph" title="Paragraph">P</button>
       </div>
 
       <div v-if="linkModal.visible" class="rte-modal-overlay" @mousedown.stop @click.stop>
@@ -69,21 +69,19 @@
         </div>
       </div>
 
+      <label class="rte-label">HTML Source</label>
+      <p class="rte-hint">Click in the box, then select text with Shift+Arrow keys or Cmd/Ctrl+A, then click a button above.</p>
+      <textarea
+        ref="textarea"
+        class="rich-text-display__source"
+        :value="content.text"
+        placeholder="Type or paste HTML here..."
+        @input="handleInput"
+        @paste="handlePaste"
+      ></textarea>
+      <label class="rte-label">Preview</label>
     </template>
     <div
-      v-if="isEditing"
-      ref="editor"
-      class="rich-text-display__content"
-      :class="{ 'rich-text-display__content--editing': isEditing }"
-      :style="contentStyle"
-      contenteditable="true"
-      @input="handleInput"
-      @paste="handlePaste"
-      @mouseup="captureSelection"
-      @keyup="captureSelection"
-    ></div>
-    <div
-      v-else
       class="rich-text-display__content"
       :style="contentStyle"
       v-html="content.text"
@@ -157,35 +155,8 @@ export default {
         section: '',
         newTab: false,
       },
-      savedRange: null,
-      isInternalUpdate: false,
+      savedSelection: { start: 0, end: 0 },
     };
-  },
-  watch: {
-    'content.text'(newValue) {
-      if (this.isInternalUpdate) {
-        this.isInternalUpdate = false;
-        return;
-      }
-      const editor = this.$refs.editor;
-      if (editor && editor.innerHTML !== (newValue || '')) {
-        editor.innerHTML = newValue || '';
-      }
-    },
-    isEditing(editing) {
-      if (editing) {
-        this.$nextTick(() => {
-          if (this.$refs.editor) {
-            this.$refs.editor.innerHTML = this.content.text || '';
-          }
-        });
-      }
-    },
-  },
-  mounted() {
-    if (this.isEditing && this.$refs.editor) {
-      this.$refs.editor.innerHTML = this.content.text || '';
-    }
   },
   computed: {
     isEditing() {
@@ -264,76 +235,75 @@ export default {
     },
   },
   methods: {
-    syncContent() {
-      const editor = this.$refs.editor;
-      if (!editor) return;
-      this.isInternalUpdate = true;
-      this.$emit('update:content', { text: editor.innerHTML });
-    },
-    handleInput() {
-      this.syncContent();
+    handleInput(event) {
+      this.$emit('update:content', { text: event.target.value });
     },
     handlePaste(event) {
-      event.preventDefault();
       const html = event.clipboardData?.getData('text/html');
-      const doc = wwLib.getFrontWindow().document;
+      if (!html) return;
 
-      if (!html) {
-        const text = event.clipboardData?.getData('text/plain') || '';
-        doc.execCommand('insertText', false, text);
-        this.syncContent();
+      event.preventDefault();
+      const doc = wwLib.getFrontWindow().document;
+      const cleaned = cleanPastedHtml(html, doc);
+      this.insertAtCursor(cleaned);
+    },
+    wrapSelection(before, after) {
+      const textarea = this.$refs.textarea;
+      const start = textarea ? textarea.selectionStart : (this.content.text || '').length;
+      const end = textarea ? textarea.selectionEnd : (this.content.text || '').length;
+      this.wrapRange(before, after, start, end);
+    },
+    wrapRange(before, after, start, end) {
+      const textarea = this.$refs.textarea;
+      const value = this.content.text || '';
+      const selected = value.slice(start, end);
+      const newValue = value.slice(0, start) + before + selected + after + value.slice(end);
+      this.$emit('update:content', { text: newValue });
+      if (!textarea) return;
+      this.$nextTick(() => {
+        textarea.focus();
+        textarea.selectionStart = start + before.length;
+        textarea.selectionEnd = start + before.length + selected.length;
+      });
+    },
+    insertAtCursor(snippet) {
+      const textarea = this.$refs.textarea;
+      const value = this.content.text || '';
+      if (!textarea) {
+        this.$emit('update:content', { text: value + snippet });
         return;
       }
-
-      const cleaned = cleanPastedHtml(html, doc);
-      doc.execCommand('insertHTML', false, cleaned);
-      this.syncContent();
-    },
-    focusEditor() {
-      const editor = this.$refs.editor;
-      if (editor) editor.focus();
-    },
-    captureSelection() {
-      const win = wwLib.getFrontWindow();
-      const selection = win.getSelection();
-      if (selection && selection.rangeCount > 0) {
-        this.savedRange = selection.getRangeAt(0).cloneRange();
-      }
-    },
-    restoreSelection() {
-      const editor = this.$refs.editor;
-      if (!editor) return;
-      editor.focus();
-      if (!this.savedRange) return;
-      const win = wwLib.getFrontWindow();
-      const selection = win.getSelection();
-      selection.removeAllRanges();
-      selection.addRange(this.savedRange);
-    },
-    exec(command, value = null) {
-      this.restoreSelection();
-      const doc = wwLib.getFrontWindow().document;
-      doc.execCommand(command, false, value);
-      this.captureSelection();
-      this.syncContent();
+      const start = textarea.selectionStart;
+      const end = textarea.selectionEnd;
+      const newValue = value.slice(0, start) + snippet + value.slice(end);
+      this.$emit('update:content', { text: newValue });
+      this.$nextTick(() => {
+        textarea.focus();
+        const cursor = start + snippet.length;
+        textarea.selectionStart = cursor;
+        textarea.selectionEnd = cursor;
+      });
     },
     insertHeading(level) {
-      this.exec('formatBlock', `H${level}`);
+      this.wrapSelection(`<h${level}>`, `</h${level}>`);
     },
     insertParagraph() {
-      this.exec('formatBlock', 'P');
+      this.wrapSelection('<p>', '</p>');
     },
     insertBold() {
-      this.exec('bold');
+      this.wrapSelection('<strong>', '</strong>');
     },
     insertItalic() {
-      this.exec('italic');
+      this.wrapSelection('<em>', '</em>');
     },
     insertUnderline() {
-      this.exec('underline');
+      this.wrapSelection('<u>', '</u>');
     },
     openLinkModal() {
-      this.captureSelection();
+      const textarea = this.$refs.textarea;
+      this.savedSelection = textarea
+        ? { start: textarea.selectionStart, end: textarea.selectionEnd }
+        : { start: (this.content.text || '').length, end: (this.content.text || '').length };
       this.linkModal = { visible: true, type: 'url', value: '', section: '', newTab: false };
     },
     closeLinkModal() {
@@ -362,43 +332,39 @@ export default {
         href = trimmed;
       }
 
-      this.restoreSelection();
-      const doc = wwLib.getFrontWindow().document;
-      const win = wwLib.getFrontWindow();
-      doc.execCommand('createLink', false, href);
+      const targetAttrs = (type === 'url' || type === 'page') && newTab
+        ? ' target="_blank" rel="noopener noreferrer"'
+        : '';
 
-      // execCommand createLink can't set target/rel directly — find the anchor(s)
-      // just created within the restored selection and set them ourselves.
-      if ((type === 'url' || type === 'page') && newTab) {
-        const selection = win.getSelection();
-        if (selection && selection.anchorNode) {
-          let node = selection.anchorNode;
-          const editor = this.$refs.editor;
-          while (node && node !== editor) {
-            if (node.nodeType === 1 && node.tagName === 'A') {
-              node.setAttribute('target', '_blank');
-              node.setAttribute('rel', 'noopener noreferrer');
-              break;
-            }
-            node = node.parentNode;
-          }
-        }
-      }
-
-      this.syncContent();
+      this.wrapRange(`<a href="${href}"${targetAttrs}>`, '</a>', this.savedSelection.start, this.savedSelection.end);
       this.closeLinkModal();
     },
     insertImage() {
       const win = wwLib.getFrontWindow();
       const url = win.prompt('Image URL');
       if (!url || !url.trim() || url.trim().toLowerCase().startsWith('javascript:')) return;
-      this.exec('insertHTML', `<img src="${url.trim()}" alt="" />`);
+      this.insertAtCursor(`<img src="${url.trim()}" alt="" />`);
     },
     insertBulletList() {
-      this.exec('insertUnorderedList');
+      this.insertList('ul');
     },
     insertNumberedList() {
-      this.exec('insertOrderedList');
+      this.insertList('ol');
+    },
+    insertList(tag) {
+      const textarea = this.$refs.textarea;
+      const value = this.content.text || '';
+      const start = textarea ? textarea.selectionStart : value.length;
+      const end = textarea ? textarea.selectionEnd : value.length;
+      const selected = value.slice(start, end);
+      const lines = selected
+        .split('\n')
+        .map((line) => line.trim())
+        .filter((line) => line.length > 0);
+      const items = (lines.length > 0 ? lines : ['List item']).map((line) => `  <li>${line}</li>`).join('\n');
+      const snippet = `<${tag}>\n${items}\n</${tag}>`;
+      const newValue = value.slice(0, start) + snippet + value.slice(end);
+      this.$emit('update:content', { text: newValue });
     },
   },
 };
@@ -440,6 +406,22 @@ export default {
   height: 18px;
   background: #ddd;
   margin: 0 4px;
+}
+
+.rte-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 6px 0 2px;
+}
+
+.rte-hint {
+  font-size: 11px;
+  color: #999;
+  margin: 0 0 4px;
 }
 
 .rte-modal-overlay {
@@ -536,6 +518,18 @@ export default {
   }
 }
 
+.rich-text-display__source {
+  width: 100%;
+  min-height: 160px;
+  box-sizing: border-box;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  padding: 8px;
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  line-height: 1.5;
+  resize: vertical;
+}
 </style>
 
 <style lang="scss">
@@ -556,22 +550,6 @@ export default {
   font-weight: var(--font-weight, normal) !important;
   line-height: var(--line-height);
   text-align: var(--text-align);
-
-  &--editing {
-    min-height: 1.5em;
-    cursor: text;
-    outline: 1px dashed transparent;
-
-    &:focus {
-      outline: 1px dashed #3b82f6;
-    }
-
-    &:empty::before {
-      content: 'Click to start typing…';
-      color: #999;
-      pointer-events: none;
-    }
-  }
 
   h1, h2, h3, h4, h5, h6 {
     margin: 0.75em 0 0.5em 0;
