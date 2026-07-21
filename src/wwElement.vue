@@ -1,7 +1,11 @@
 <template>
-  <div class="rich-text-display" data-capture>
+  <div class="rich-text-display" data-capture ref="root">
     <template v-if="isTextEditionMode">
-      <div class="rich-text-display__toolbar">
+      <div
+        v-if="bubbleMenu.visible"
+        class="rich-text-display__toolbar rich-text-display__toolbar--floating"
+        :style="{ top: bubbleMenu.top + 'px', left: bubbleMenu.left + 'px' }"
+      >
         <button type="button" class="rte-btn" @mousedown.prevent @click="insertHeading(1)" title="Heading 1">H1</button>
         <button type="button" class="rte-btn" @mousedown.prevent @click="insertHeading(2)" title="Heading 2">H2</button>
         <button type="button" class="rte-btn" @mousedown.prevent @click="insertHeading(3)" title="Heading 3">H3</button>
@@ -162,6 +166,11 @@ export default {
       },
       savedRange: null,
       isInternalUpdate: false,
+      bubbleMenu: {
+        visible: false,
+        top: 0,
+        left: 0,
+      },
     };
   },
   watch: {
@@ -310,6 +319,39 @@ export default {
       if (selection && selection.rangeCount > 0) {
         this.savedRange = selection.getRangeAt(0).cloneRange();
       }
+      this.updateBubbleMenu();
+    },
+    updateBubbleMenu() {
+      const editor = this.$refs.editor;
+      const root = this.$refs.root;
+      if (!editor || !root) {
+        this.bubbleMenu.visible = false;
+        return;
+      }
+
+      const win = wwLib.getFrontWindow();
+      const selection = win.getSelection();
+      if (!selection || selection.isCollapsed || selection.rangeCount === 0) {
+        this.bubbleMenu.visible = false;
+        return;
+      }
+
+      const range = selection.getRangeAt(0);
+      if (!editor.contains(range.commonAncestorContainer)) {
+        this.bubbleMenu.visible = false;
+        return;
+      }
+
+      const rect = range.getBoundingClientRect();
+      if (rect.width === 0 && rect.height === 0) {
+        this.bubbleMenu.visible = false;
+        return;
+      }
+
+      const rootRect = root.getBoundingClientRect();
+      this.bubbleMenu.visible = true;
+      this.bubbleMenu.top = rect.top - rootRect.top - 44;
+      this.bubbleMenu.left = rect.left - rootRect.left + rect.width / 2;
     },
     handleMouseDown(event) {
       // If mousedown lands inside an existing (non-collapsed) text selection,
@@ -446,6 +488,7 @@ export default {
 .rich-text-display {
   width: 100%;
   box-sizing: border-box;
+  position: relative;
 }
 
 .rich-text-display__toolbar {
@@ -458,6 +501,30 @@ export default {
   border: 1px solid #e0e0e0;
   border-bottom: none;
   border-radius: 4px 4px 0 0;
+
+  &--floating {
+    position: absolute;
+    z-index: 50;
+    transform: translateX(-50%);
+    border: 1px solid #333;
+    border-radius: 6px;
+    background: #1a1a1a;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+
+    .rte-btn {
+      background: transparent;
+      border: none;
+      color: #eee;
+
+      &:hover {
+        background: #333;
+      }
+    }
+
+    .rte-divider {
+      background: #444;
+    }
+  }
 }
 
 .rte-btn {
