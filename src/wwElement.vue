@@ -33,6 +33,14 @@
               <option value="" disabled>Select a page…</option>
               <option v-for="(page, index) in pages" :key="index" :value="page.path">{{ page.name }}</option>
             </select>
+
+            <template v-if="selectedPageSections.length">
+              <label class="rte-modal-label">Section</label>
+              <select v-model="linkModal.section" class="rte-modal-select">
+                <option value="">Top of page</option>
+                <option v-for="(section, index) in selectedPageSections" :key="index" :value="section.anchor">{{ section.name }}</option>
+              </select>
+            </template>
           </template>
           <template v-else-if="linkModal.type === 'email'">
             <label class="rte-modal-label">Email address</label>
@@ -45,6 +53,13 @@
           <template v-else>
             <label class="rte-modal-label">Url</label>
             <input v-model="linkModal.value" class="rte-modal-input" placeholder="https://example.com" @keydown.enter="applyLinkModal" />
+          </template>
+
+          <template v-if="linkModal.type === 'url' || linkModal.type === 'page'">
+            <label class="rte-modal-label rte-modal-label--row">
+              <span>Open in new tab</span>
+              <input type="checkbox" v-model="linkModal.newTab" />
+            </label>
           </template>
 
           <div class="rte-modal-actions">
@@ -137,6 +152,8 @@ export default {
         visible: false,
         type: 'url',
         value: '',
+        section: '',
+        newTab: false,
       },
       savedSelection: { start: 0, end: 0 },
     };
@@ -151,6 +168,10 @@ export default {
     },
     pages() {
       return this.content?.pages || [];
+    },
+    selectedPageSections() {
+      const page = this.pages.find((p) => p.path === this.linkModal.value);
+      return page?.sections || [];
     },
     contentStyle() {
       return {
@@ -275,13 +296,13 @@ export default {
       this.savedSelection = textarea
         ? { start: textarea.selectionStart, end: textarea.selectionEnd }
         : { start: (this.content.text || '').length, end: (this.content.text || '').length };
-      this.linkModal = { visible: true, type: 'url', value: '' };
+      this.linkModal = { visible: true, type: 'url', value: '', section: '', newTab: false };
     },
     closeLinkModal() {
       this.linkModal.visible = false;
     },
     applyLinkModal() {
-      const { type, value } = this.linkModal;
+      const { type, value, section, newTab } = this.linkModal;
       const trimmed = (value || '').trim();
       if (!trimmed) {
         this.closeLinkModal();
@@ -290,7 +311,7 @@ export default {
 
       let href = '';
       if (type === 'page') {
-        href = trimmed;
+        href = trimmed + (section ? `#${section}` : '');
       } else if (type === 'email') {
         href = `mailto:${trimmed}`;
       } else if (type === 'phone') {
@@ -303,7 +324,11 @@ export default {
         href = trimmed;
       }
 
-      this.wrapRange(`<a href="${href}">`, '</a>', this.savedSelection.start, this.savedSelection.end);
+      const targetAttrs = (type === 'url' || type === 'page') && newTab
+        ? ' target="_blank" rel="noopener noreferrer"'
+        : '';
+
+      this.wrapRange(`<a href="${href}"${targetAttrs}>`, '</a>', this.savedSelection.start, this.savedSelection.end);
       this.closeLinkModal();
     },
     insertImage() {
@@ -419,6 +444,19 @@ export default {
 
   &:first-child {
     margin-top: 0;
+  }
+
+  &--row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 13px;
+    color: #ddd;
+    cursor: pointer;
+
+    input[type="checkbox"] {
+      cursor: pointer;
+    }
   }
 }
 

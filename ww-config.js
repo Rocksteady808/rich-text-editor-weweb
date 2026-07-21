@@ -29,7 +29,7 @@ export default {
         },
         item: {
           type: "Object",
-          defaultValue: { name: "New Page", path: "/" },
+          defaultValue: { name: "New Page", path: "/", sections: [] },
           options: {
             item: {
               name: {
@@ -40,22 +40,49 @@ export default {
                 label: { en: "Path" },
                 type: "Text",
               },
+              sections: {
+                label: { en: "Sections (optional)" },
+                type: "Array",
+                options: {
+                  expandable: true,
+                  getItemLabel(item) {
+                    return item?.name || "Section";
+                  },
+                  item: {
+                    type: "Object",
+                    defaultValue: { name: "New Section", anchor: "section-id" },
+                    options: {
+                      item: {
+                        name: {
+                          label: { en: "Name" },
+                          type: "Text",
+                        },
+                        anchor: {
+                          label: { en: "Anchor ID" },
+                          type: "Text",
+                        },
+                      },
+                    },
+                  },
+                },
+                defaultValue: [],
+              },
             },
           },
         },
       },
       defaultValue: [
-        { name: "Home", path: "/home" },
-        { name: "Papers", path: "/papers" },
-        { name: "Tips", path: "/tips" },
-        { name: "Cones", path: "/cones" },
-        { name: "Accessories", path: "/accessories" },
-        { name: "Lifestyle", path: "/lifestyle" },
-        { name: "Distributors", path: "/distributors" },
-        { name: "Medical Marijuana", path: "/medical-marijuana" },
-        { name: "Brand Protection", path: "/brand-protection" },
-        { name: "Privacy Policy", path: "/privacy-policy" },
-        { name: "California Proposition 65 Warning", path: "/california-proposition-65-warning" },
+        { name: "Home", path: "/home", sections: [] },
+        { name: "Papers", path: "/papers", sections: [] },
+        { name: "Tips", path: "/tips", sections: [] },
+        { name: "Cones", path: "/cones", sections: [] },
+        { name: "Accessories", path: "/accessories", sections: [] },
+        { name: "Lifestyle", path: "/lifestyle", sections: [] },
+        { name: "Distributors", path: "/distributors", sections: [] },
+        { name: "Medical Marijuana", path: "/medical-marijuana", sections: [] },
+        { name: "Brand Protection", path: "/brand-protection", sections: [] },
+        { name: "Privacy Policy", path: "/privacy-policy", sections: [] },
+        { name: "California Proposition 65 Warning", path: "/california-proposition-65-warning", sections: [] },
       ],
     },
 
