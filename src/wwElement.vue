@@ -10,23 +10,50 @@
         <button type="button" class="rte-btn" @click="insertItalic" title="Italic"><em>I</em></button>
         <button type="button" class="rte-btn" @click="insertUnderline" title="Underline"><u>U</u></button>
         <span class="rte-divider"></span>
-        <button type="button" class="rte-btn" @click="insertLink" title="Link to URL">Link</button>
-        <button type="button" class="rte-btn" @click="insertEmailLink" title="Link to email address">Email</button>
-        <button type="button" class="rte-btn" @click="insertPhoneLink" title="Link to phone number">Phone</button>
-        <select
-          class="rte-select"
-          title="Link to a page"
-          :value="''"
-          @change="insertPageLink($event.target.value); $event.target.value = ''"
-        >
-          <option value="" disabled>Link to page…</option>
-          <option v-for="(page, index) in pages" :key="index" :value="page.path">{{ page.name }}</option>
-        </select>
+        <button type="button" class="rte-btn" @click="openLinkModal" title="Insert link">Link</button>
         <button type="button" class="rte-btn" @click="insertBulletList" title="Bullet list">&bull; List</button>
         <button type="button" class="rte-btn" @click="insertNumberedList" title="Numbered list">1. List</button>
         <button type="button" class="rte-btn" @click="insertImage" title="Image">Image</button>
         <button type="button" class="rte-btn" @click="insertParagraph" title="Paragraph">P</button>
       </div>
+
+      <div v-if="linkModal.visible" class="rte-modal-overlay" @mousedown.stop @click.stop>
+        <div class="rte-modal">
+          <label class="rte-modal-label">Link to</label>
+          <select v-model="linkModal.type" class="rte-modal-select">
+            <option value="url">Url</option>
+            <option value="page">Page</option>
+            <option value="email">Email</option>
+            <option value="phone">Phone number</option>
+          </select>
+
+          <template v-if="linkModal.type === 'page'">
+            <label class="rte-modal-label">Page</label>
+            <select v-model="linkModal.value" class="rte-modal-select">
+              <option value="" disabled>Select a page…</option>
+              <option v-for="(page, index) in pages" :key="index" :value="page.path">{{ page.name }}</option>
+            </select>
+          </template>
+          <template v-else-if="linkModal.type === 'email'">
+            <label class="rte-modal-label">Email address</label>
+            <input v-model="linkModal.value" class="rte-modal-input" placeholder="name@example.com" />
+          </template>
+          <template v-else-if="linkModal.type === 'phone'">
+            <label class="rte-modal-label">Phone number</label>
+            <input v-model="linkModal.value" class="rte-modal-input" placeholder="+1 555 555 5555" />
+          </template>
+          <template v-else>
+            <label class="rte-modal-label">Url</label>
+            <input v-model="linkModal.value" class="rte-modal-input" placeholder="https://example.com" @keydown.enter="applyLinkModal" />
+          </template>
+
+          <div class="rte-modal-actions">
+            <button type="button" class="rte-modal-btn rte-modal-btn--cancel" @click="closeLinkModal">Cancel</button>
+            <button type="button" class="rte-modal-btn rte-modal-btn--ok" @click="applyLinkModal">OK</button>
+          </div>
+        </div>
+      </div>
+
       <label class="rte-label">HTML Source</label>
       <p class="rte-hint">Click in the box, then select text with Shift+Arrow keys or Cmd/Ctrl+A, then click a button above.</p>
       <textarea
@@ -104,6 +131,16 @@ export default {
     /* wwEditor:end */
   },
   emits: ['update:content'],
+  data() {
+    return {
+      linkModal: {
+        visible: false,
+        type: 'url',
+        value: '',
+      },
+      savedSelection: { start: 0, end: 0 },
+    };
+  },
   computed: {
     isEditing() {
       let result = false;
@@ -183,16 +220,17 @@ export default {
     },
     wrapSelection(before, after) {
       const textarea = this.$refs.textarea;
+      const start = textarea ? textarea.selectionStart : (this.content.text || '').length;
+      const end = textarea ? textarea.selectionEnd : (this.content.text || '').length;
+      this.wrapRange(before, after, start, end);
+    },
+    wrapRange(before, after, start, end) {
+      const textarea = this.$refs.textarea;
       const value = this.content.text || '';
-      if (!textarea) {
-        this.$emit('update:content', { text: value + before + after });
-        return;
-      }
-      const start = textarea.selectionStart;
-      const end = textarea.selectionEnd;
       const selected = value.slice(start, end);
       const newValue = value.slice(0, start) + before + selected + after + value.slice(end);
       this.$emit('update:content', { text: newValue });
+      if (!textarea) return;
       this.$nextTick(() => {
         textarea.focus();
         textarea.selectionStart = start + before.length;
@@ -232,28 +270,41 @@ export default {
     insertUnderline() {
       this.wrapSelection('<u>', '</u>');
     },
-    insertLink() {
-      const win = wwLib.getFrontWindow();
-      const url = win.prompt('Link URL');
-      if (!url || !url.trim() || url.trim().toLowerCase().startsWith('javascript:')) return;
-      this.wrapSelection(`<a href="${url.trim()}" target="_blank" rel="noopener noreferrer">`, '</a>');
+    openLinkModal() {
+      const textarea = this.$refs.textarea;
+      this.savedSelection = textarea
+        ? { start: textarea.selectionStart, end: textarea.selectionEnd }
+        : { start: (this.content.text || '').length, end: (this.content.text || '').length };
+      this.linkModal = { visible: true, type: 'url', value: '' };
     },
-    insertPageLink(path) {
-      if (!path) return;
-      this.wrapSelection(`<a href="${path}">`, '</a>');
+    closeLinkModal() {
+      this.linkModal.visible = false;
     },
-    insertEmailLink() {
-      const win = wwLib.getFrontWindow();
-      const email = win.prompt('Email address');
-      if (!email || !email.trim()) return;
-      this.wrapSelection(`<a href="mailto:${email.trim()}">`, '</a>');
-    },
-    insertPhoneLink() {
-      const win = wwLib.getFrontWindow();
-      const phone = win.prompt('Phone number');
-      if (!phone || !phone.trim()) return;
-      const cleaned = phone.trim().replace(/[^0-9+]/g, '');
-      this.wrapSelection(`<a href="tel:${cleaned}">`, '</a>');
+    applyLinkModal() {
+      const { type, value } = this.linkModal;
+      const trimmed = (value || '').trim();
+      if (!trimmed) {
+        this.closeLinkModal();
+        return;
+      }
+
+      let href = '';
+      if (type === 'page') {
+        href = trimmed;
+      } else if (type === 'email') {
+        href = `mailto:${trimmed}`;
+      } else if (type === 'phone') {
+        href = `tel:${trimmed.replace(/[^0-9+]/g, '')}`;
+      } else {
+        if (trimmed.toLowerCase().startsWith('javascript:')) {
+          this.closeLinkModal();
+          return;
+        }
+        href = trimmed;
+      }
+
+      this.wrapRange(`<a href="${href}">`, '</a>', this.savedSelection.start, this.savedSelection.end);
+      this.closeLinkModal();
     },
     insertImage() {
       const win = wwLib.getFrontWindow();
@@ -317,16 +368,6 @@ export default {
   }
 }
 
-.rte-select {
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  padding: 4px 6px;
-  font-size: 13px;
-  cursor: pointer;
-  max-width: 140px;
-}
-
 .rte-divider {
   width: 1px;
   height: 18px;
@@ -348,6 +389,87 @@ export default {
   font-size: 11px;
   color: #999;
   margin: 0 0 4px;
+}
+
+.rte-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rte-modal {
+  background: #1a1a1a;
+  color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  width: 320px;
+  max-width: 90vw;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.rte-modal-label {
+  display: block;
+  font-size: 12px;
+  color: #aaa;
+  margin: 12px 0 4px;
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+.rte-modal-select,
+.rte-modal-input {
+  width: 100%;
+  box-sizing: border-box;
+  background: #2b2b2b;
+  color: #fff;
+  border: 1px solid #444;
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-size: 14px;
+
+  &:focus {
+    outline: none;
+    border-color: #3b82f6;
+  }
+}
+
+.rte-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.rte-modal-btn {
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+
+  &--cancel {
+    background: transparent;
+    color: #ccc;
+
+    &:hover {
+      background: #2b2b2b;
+    }
+  }
+
+  &--ok {
+    background: #3b82f6;
+    color: #fff;
+
+    &:hover {
+      background: #2563eb;
+    }
+  }
 }
 
 .rich-text-display__source {
