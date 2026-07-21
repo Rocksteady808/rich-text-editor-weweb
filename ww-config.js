@@ -171,6 +171,7 @@ export default {
       },
       type: "Color",
       section: "style",
+      classes: true,
       bindable: true,
       responsive: true,
       hidden: (content) => content.styleTarget !== "base",
@@ -181,6 +182,7 @@ export default {
       },
       type: "Length",
       section: "style",
+      classes: true,
       options: {
         unitChoices: [
           { value: "px", label: "px", min: 8, max: 100 },
@@ -198,6 +200,7 @@ export default {
       },
       type: "FontFamily",
       section: "style",
+      classes: true,
       responsive: true,
       hidden: (content) => content.styleTarget !== "base",
     },
@@ -205,6 +208,7 @@ export default {
       label: { en: "Font Weight" },
       type: "TextSelect",
       section: "style",
+      classes: true,
       options: {
         options: [
           { value: "", label: { en: "Default" } },
@@ -224,6 +228,7 @@ export default {
       },
       type: "Length",
       section: "style",
+      classes: true,
       options: {
         unitChoices: [
           { value: "auto", label: "auto" },
@@ -244,6 +249,7 @@ export default {
       },
       type: "TextRadioGroup",
       section: "style",
+      classes: true,
       options: {
         choices: [
           { value: "left", title: { en: "Left" }, icon: "align-left", default: true },
@@ -260,6 +266,7 @@ export default {
       },
       type: "Color",
       section: "style",
+      classes: true,
       bindable: true,
       responsive: true,
     },
@@ -269,6 +276,7 @@ export default {
       },
       type: "Length",
       section: "style",
+      classes: true,
       options: {
         unitChoices: [{ value: "px", label: "px", min: 0, max: 100 }],
       },
@@ -280,6 +288,7 @@ export default {
       },
       type: "OnOff",
       section: "style",
+      classes: true,
       defaultValue: false,
     },
     borderWidth: {
@@ -288,6 +297,7 @@ export default {
       },
       type: "Length",
       section: "style",
+      classes: true,
       hidden: (content) => !content.showBorder,
       options: {
         unitChoices: [{ value: "px", label: "px", min: 0, max: 20 }],
@@ -300,6 +310,7 @@ export default {
       },
       type: "TextSelect",
       section: "style",
+      classes: true,
       hidden: (content) => !content.showBorder,
       options: {
         options: [
@@ -316,6 +327,7 @@ export default {
       },
       type: "Color",
       section: "style",
+      classes: true,
       hidden: (content) => !content.showBorder,
       defaultValue: "#dddddd",
     },
@@ -325,6 +337,7 @@ export default {
       },
       type: "Length",
       section: "style",
+      classes: true,
       options: {
         unitChoices: [{ value: "px", label: "px", min: 0, max: 100 }],
       },
@@ -335,6 +348,7 @@ export default {
       label: { en: "Paragraph Color" },
       type: "Color",
       section: "style",
+      classes: true,
       bindable: true,
       responsive: true,
       hidden: (content) => content.styleTarget !== "paragraph",
@@ -343,6 +357,7 @@ export default {
       label: { en: "Paragraph Font Size" },
       type: "Length",
       section: "style",
+      classes: true,
       options: {
         unitChoices: [
           { value: "px", label: "px", min: 8, max: 100 },
@@ -358,6 +373,7 @@ export default {
       label: { en: "Paragraph Font Family" },
       type: "FontFamily",
       section: "style",
+      classes: true,
       responsive: true,
       hidden: (content) => content.styleTarget !== "paragraph",
     },
@@ -365,6 +381,7 @@ export default {
       label: { en: "Paragraph Font Weight" },
       type: "TextSelect",
       section: "style",
+      classes: true,
       options: {
         options: [
           { value: "", label: { en: "Default" } },
@@ -382,6 +399,7 @@ export default {
       label: { en: "Paragraph Line Height" },
       type: "Length",
       section: "style",
+      classes: true,
       options: {
         unitChoices: [
           { value: "auto", label: "auto" },
@@ -401,6 +419,7 @@ export default {
       label: { en: "Heading 1 Color" },
       type: "Color",
       section: "style",
+      classes: true,
       bindable: true,
       responsive: true,
       hidden: (content) => content.styleTarget !== "heading1",
@@ -409,6 +428,7 @@ export default {
       label: { en: "Heading 1 Font Size" },
       type: "Length",
       section: "style",
+      classes: true,
       options: {
         unitChoices: [
           { value: "px", label: "px", min: 8, max: 120 },
@@ -424,6 +444,7 @@ export default {
       label: { en: "Heading 1 Font Family" },
       type: "FontFamily",
       section: "style",
+      classes: true,
       responsive: true,
       hidden: (content) => content.styleTarget !== "heading1",
     },
@@ -431,6 +452,7 @@ export default {
       label: { en: "Heading 1 Font Weight" },
       type: "TextSelect",
       section: "style",
+      classes: true,
       options: {
         options: [
           { value: "", label: { en: "Default" } },
@@ -449,6 +471,7 @@ export default {
       label: { en: "Heading 1 Line Height" },
       type: "Length",
       section: "style",
+      classes: true,
       options: {
         unitChoices: [
           { value: "auto", label: "auto" },
@@ -468,6 +491,7 @@ export default {
       label: { en: "Heading 2 Color" },
       type: "Color",
       section: "style",
+      classes: true,
       bindable: true,
       responsive: true,
       hidden: (content) => content.styleTarget !== "heading2",
@@ -476,6 +500,7 @@ export default {
       label: { en: "Heading 2 Font Size" },
       type: "Length",
       section: "style",
+      classes: true,
       options: {
         unitChoices: [
           { value: "px", label: "px", min: 8, max: 120 },
@@ -491,6 +516,7 @@ export default {
       label: { en: "Heading 2 Font Family" },
       type: "FontFamily",
       section: "style",
+      classes: true,
       responsive: true,
       hidden: (content) => content.styleTarget !== "heading2",
     },
@@ -498,6 +524,7 @@ export default {
       label: { en: "Heading 2 Font Weight" },
       type: "TextSelect",
       section: "style",
+      classes: true,
       options: {
         options: [
           { value: "", label: { en: "Default" } },
@@ -516,6 +543,7 @@ export default {
       label: { en: "Heading 2 Line Height" },
       type: "Length",
       section: "style",
+      classes: true,
       options: {
         unitChoices: [
           { value: "auto", label: "auto" },
@@ -535,6 +563,7 @@ export default {
       label: { en: "Heading 3 Color" },
       type: "Color",
       section: "style",
+      classes: true,
       bindable: true,
       responsive: true,
       hidden: (content) => content.styleTarget !== "heading3",
@@ -543,6 +572,7 @@ export default {
       label: { en: "Heading 3 Font Size" },
       type: "Length",
       section: "style",
+      classes: true,
       options: {
         unitChoices: [
           { value: "px", label: "px", min: 8, max: 120 },
@@ -558,6 +588,7 @@ export default {
       label: { en: "Heading 3 Font Family" },
       type: "FontFamily",
       section: "style",
+      classes: true,
       responsive: true,
       hidden: (content) => content.styleTarget !== "heading3",
     },
@@ -565,6 +596,7 @@ export default {
       label: { en: "Heading 3 Font Weight" },
       type: "TextSelect",
       section: "style",
+      classes: true,
       options: {
         options: [
           { value: "", label: { en: "Default" } },
@@ -583,6 +615,7 @@ export default {
       label: { en: "Heading 3 Line Height" },
       type: "Length",
       section: "style",
+      classes: true,
       options: {
         unitChoices: [
           { value: "auto", label: "auto" },
@@ -602,6 +635,7 @@ export default {
       label: { en: "Heading 4 Color" },
       type: "Color",
       section: "style",
+      classes: true,
       bindable: true,
       responsive: true,
       hidden: (content) => content.styleTarget !== "heading4",
@@ -610,6 +644,7 @@ export default {
       label: { en: "Heading 4 Font Size" },
       type: "Length",
       section: "style",
+      classes: true,
       options: {
         unitChoices: [
           { value: "px", label: "px", min: 8, max: 120 },
@@ -625,6 +660,7 @@ export default {
       label: { en: "Heading 4 Font Family" },
       type: "FontFamily",
       section: "style",
+      classes: true,
       responsive: true,
       hidden: (content) => content.styleTarget !== "heading4",
     },
@@ -632,6 +668,7 @@ export default {
       label: { en: "Heading 4 Font Weight" },
       type: "TextSelect",
       section: "style",
+      classes: true,
       options: {
         options: [
           { value: "", label: { en: "Default" } },
@@ -650,6 +687,7 @@ export default {
       label: { en: "Heading 4 Line Height" },
       type: "Length",
       section: "style",
+      classes: true,
       options: {
         unitChoices: [
           { value: "auto", label: "auto" },
@@ -669,6 +707,7 @@ export default {
       label: { en: "Heading 5 Color" },
       type: "Color",
       section: "style",
+      classes: true,
       bindable: true,
       responsive: true,
       hidden: (content) => content.styleTarget !== "heading5",
@@ -677,6 +716,7 @@ export default {
       label: { en: "Heading 5 Font Size" },
       type: "Length",
       section: "style",
+      classes: true,
       options: {
         unitChoices: [
           { value: "px", label: "px", min: 8, max: 120 },
@@ -692,6 +732,7 @@ export default {
       label: { en: "Heading 5 Font Family" },
       type: "FontFamily",
       section: "style",
+      classes: true,
       responsive: true,
       hidden: (content) => content.styleTarget !== "heading5",
     },
@@ -699,6 +740,7 @@ export default {
       label: { en: "Heading 5 Font Weight" },
       type: "TextSelect",
       section: "style",
+      classes: true,
       options: {
         options: [
           { value: "", label: { en: "Default" } },
@@ -717,6 +759,7 @@ export default {
       label: { en: "Heading 5 Line Height" },
       type: "Length",
       section: "style",
+      classes: true,
       options: {
         unitChoices: [
           { value: "auto", label: "auto" },
@@ -736,6 +779,7 @@ export default {
       label: { en: "Heading 6 Color" },
       type: "Color",
       section: "style",
+      classes: true,
       bindable: true,
       responsive: true,
       hidden: (content) => content.styleTarget !== "heading6",
@@ -744,6 +788,7 @@ export default {
       label: { en: "Heading 6 Font Size" },
       type: "Length",
       section: "style",
+      classes: true,
       options: {
         unitChoices: [
           { value: "px", label: "px", min: 8, max: 120 },
@@ -759,6 +804,7 @@ export default {
       label: { en: "Heading 6 Font Family" },
       type: "FontFamily",
       section: "style",
+      classes: true,
       responsive: true,
       hidden: (content) => content.styleTarget !== "heading6",
     },
@@ -766,6 +812,7 @@ export default {
       label: { en: "Heading 6 Font Weight" },
       type: "TextSelect",
       section: "style",
+      classes: true,
       options: {
         options: [
           { value: "", label: { en: "Default" } },
@@ -784,6 +831,7 @@ export default {
       label: { en: "Heading 6 Line Height" },
       type: "Length",
       section: "style",
+      classes: true,
       options: {
         unitChoices: [
           { value: "auto", label: "auto" },
@@ -803,6 +851,7 @@ export default {
       label: { en: "Link Color" },
       type: "Color",
       section: "style",
+      classes: true,
       bindable: true,
       responsive: true,
       hidden: (content) => content.styleTarget !== "link",
@@ -811,6 +860,7 @@ export default {
       label: { en: "Link Font Weight" },
       type: "TextSelect",
       section: "style",
+      classes: true,
       options: {
         options: [
           { value: "", label: { en: "Default" } },
@@ -828,6 +878,7 @@ export default {
       label: { en: "Link Font Size" },
       type: "Length",
       section: "style",
+      classes: true,
       options: {
         unitChoices: [
           { value: "px", label: "px", min: 8, max: 100 },
@@ -843,6 +894,7 @@ export default {
       label: { en: "Underline Links" },
       type: "OnOff",
       section: "style",
+      classes: true,
       defaultValue: true,
       hidden: (content) => content.styleTarget !== "link",
     },
@@ -851,6 +903,7 @@ export default {
       label: { en: "List Color" },
       type: "Color",
       section: "style",
+      classes: true,
       bindable: true,
       responsive: true,
       hidden: (content) => content.styleTarget !== "list",
@@ -859,6 +912,7 @@ export default {
       label: { en: "List Font Size" },
       type: "Length",
       section: "style",
+      classes: true,
       options: {
         unitChoices: [
           { value: "px", label: "px", min: 8, max: 100 },
@@ -874,6 +928,7 @@ export default {
       label: { en: "List Font Family" },
       type: "FontFamily",
       section: "style",
+      classes: true,
       responsive: true,
       hidden: (content) => content.styleTarget !== "list",
     },
@@ -881,6 +936,7 @@ export default {
       label: { en: "List Font Weight" },
       type: "TextSelect",
       section: "style",
+      classes: true,
       options: {
         options: [
           { value: "", label: { en: "Default" } },
@@ -899,6 +955,7 @@ export default {
       label: { en: "List Line Height" },
       type: "Length",
       section: "style",
+      classes: true,
       options: {
         unitChoices: [
           { value: "auto", label: "auto" },
