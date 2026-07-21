@@ -518,6 +518,8 @@ export default {
   &--floating {
     position: absolute;
     z-index: 50;
+    width: max-content;
+    flex-wrap: nowrap;
     transform: translateX(-50%);
     border: 1px solid #333;
     border-radius: 6px;
