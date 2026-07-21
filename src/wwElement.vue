@@ -1,5 +1,12 @@
 <template>
-  <div class="rich-text-display" data-capture ref="root">
+  <div
+    class="rich-text-display"
+    data-capture
+    ref="root"
+    @mousedown.stop="isTextEditionMode && handleMouseDown($event)"
+    @mousemove.stop
+    @dragstart.prevent
+  >
     <template v-if="isTextEditionMode">
       <div
         v-if="bubbleMenu.visible"
