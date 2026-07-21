@@ -668,6 +668,14 @@ export default {
   line-height: var(--line-height);
   text-align: var(--text-align);
 
+  > *:first-child {
+    margin-top: 0;
+  }
+
+  > *:last-child {
+    margin-bottom: 0;
+  }
+
   &--editing {
     min-height: 1.5em;
     cursor: text;
