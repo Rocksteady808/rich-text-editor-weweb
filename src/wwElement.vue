@@ -1,6 +1,6 @@
 <template>
   <div class="rich-text-display" data-capture>
-    <template v-if="isEditing">
+    <template v-if="isTextEditionMode">
       <div class="rich-text-display__toolbar">
         <button type="button" class="rte-btn" @mousedown.prevent @click="insertHeading(1)" title="Heading 1">H1</button>
         <button type="button" class="rte-btn" @mousedown.prevent @click="insertHeading(2)" title="Heading 2">H2</button>
@@ -71,10 +71,9 @@
 
     </template>
     <div
-      v-if="isEditing"
+      v-if="isTextEditionMode"
       ref="editor"
-      class="rich-text-display__content"
-      :class="{ 'rich-text-display__content--editing': isEditing }"
+      class="rich-text-display__content rich-text-display__content--editing"
       :style="contentStyle"
       contenteditable="true"
       draggable="false"
@@ -173,18 +172,19 @@ export default {
         editor.innerHTML = newValue || '';
       }
     },
-    isEditing(editing) {
+    isTextEditionMode(editing) {
       if (editing) {
         this.$nextTick(() => {
           if (this.$refs.editor) {
             this.$refs.editor.innerHTML = this.content.text || '';
+            this.$refs.editor.focus();
           }
         });
       }
     },
   },
   mounted() {
-    if (this.isEditing && this.$refs.editor) {
+    if (this.isTextEditionMode && this.$refs.editor) {
       this.$refs.editor.innerHTML = this.content.text || '';
     }
   },
@@ -193,6 +193,13 @@ export default {
       let result = false;
       /* wwEditor:start */
       result = !!this.wwEditorState?.isEditing;
+      /* wwEditor:end */
+      return result;
+    },
+    isTextEditionMode() {
+      let result = false;
+      /* wwEditor:start */
+      result = this.wwEditorState?.editMode === wwLib.wwEditorHelper.EDIT_MODES.EDITION;
       /* wwEditor:end */
       return result;
     },
