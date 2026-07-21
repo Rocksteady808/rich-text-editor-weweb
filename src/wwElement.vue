@@ -77,6 +77,7 @@
       :class="{ 'rich-text-display__content--editing': isEditing }"
       :style="contentStyle"
       contenteditable="true"
+      draggable="false"
       @input="handleInput"
       @paste="handlePaste"
       @mouseup="captureSelection"
