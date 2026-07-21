@@ -425,9 +425,48 @@ export default {
     insertUnderline() {
       this.exec('underline');
     },
+    findLinkInSelection() {
+      const win = wwLib.getFrontWindow();
+      const selection = win.getSelection();
+      const editor = this.$refs.editor;
+      if (!selection || !editor || selection.rangeCount === 0) return null;
+
+      let node = selection.anchorNode;
+      while (node && node !== editor) {
+        if (node.nodeType === 1 && node.tagName === 'A') return node;
+        node = node.parentNode;
+      }
+      return null;
+    },
     openLinkModal() {
       this.captureSelection();
-      this.linkModal = { visible: true, type: 'url', value: '', section: '', newTab: false };
+      const existingLink = this.findLinkInSelection();
+
+      if (!existingLink) {
+        this.linkModal = { visible: true, type: 'url', value: '', section: '', newTab: false };
+        return;
+      }
+
+      const href = existingLink.getAttribute('href') || '';
+      const newTab = existingLink.getAttribute('target') === '_blank';
+
+      if (href.startsWith('mailto:')) {
+        this.linkModal = { visible: true, type: 'email', value: href.slice('mailto:'.length), section: '', newTab };
+        return;
+      }
+      if (href.startsWith('tel:')) {
+        this.linkModal = { visible: true, type: 'phone', value: href.slice('tel:'.length), section: '', newTab };
+        return;
+      }
+
+      const [path, hash] = href.split('#');
+      const matchedPage = this.pages.find((p) => p.path === path);
+      if (matchedPage) {
+        this.linkModal = { visible: true, type: 'page', value: path, section: hash || '', newTab };
+        return;
+      }
+
+      this.linkModal = { visible: true, type: 'url', value: href, section: '', newTab };
     },
     closeLinkModal() {
       this.linkModal.visible = false;
@@ -458,6 +497,25 @@ export default {
       this.restoreSelection();
       const doc = wwLib.getFrontWindow().document;
       const win = wwLib.getFrontWindow();
+
+      // createLink needs a non-collapsed selection to act on. If the modal was
+      // opened by just clicking into an existing link (no drag-select), select
+      // that link's full contents first so editing it actually updates the href.
+      const selection = win.getSelection();
+      if (selection && selection.isCollapsed) {
+        let node = selection.anchorNode;
+        const editor = this.$refs.editor;
+        while (node && node !== editor && !(node.nodeType === 1 && node.tagName === 'A')) {
+          node = node.parentNode;
+        }
+        if (node && node !== editor) {
+          const range = doc.createRange();
+          range.selectNodeContents(node);
+          selection.removeAllRanges();
+          selection.addRange(range);
+        }
+      }
+
       doc.execCommand('createLink', false, href);
 
       // execCommand createLink can't set target/rel directly — find the anchor(s)
@@ -795,7 +853,7 @@ export default {
   a {
     color: var(--link-color) !important;
     font-size: var(--link-font-size) !important;
-    text-decoration: var(--link-text-decoration) !important;
+    text-decoration: var(--link-text-decoration);
     font-weight: var(--link-font-weight, normal) !important;
 
     &:hover {
