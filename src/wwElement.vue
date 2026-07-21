@@ -79,7 +79,8 @@
       draggable="false"
       @input="handleInput"
       @paste="handlePaste"
-      @mousedown="handleMouseDown"
+      @mousedown.stop="handleMouseDown"
+      @mousemove.stop
       @mouseup="captureSelection"
       @keyup="captureSelection"
       @dragstart.prevent
