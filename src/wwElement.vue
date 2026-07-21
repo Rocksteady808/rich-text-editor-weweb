@@ -34,7 +34,7 @@
               <option v-for="(page, index) in pages" :key="index" :value="page.path">{{ page.name }}</option>
             </select>
 
-            <template v-if="selectedPageSections.length">
+            <template v-if="linkModal.value">
               <label class="rte-modal-label">Section</label>
               <select v-model="linkModal.section" class="rte-modal-select">
                 <option value="">Top of page</option>
