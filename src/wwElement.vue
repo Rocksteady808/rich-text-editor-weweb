@@ -81,6 +81,7 @@
       @paste="handlePaste"
       @mouseup="captureSelection"
       @keyup="captureSelection"
+      @dragstart.prevent
     ></div>
     <div
       v-else
