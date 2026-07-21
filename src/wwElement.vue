@@ -12,6 +12,9 @@
         <button type="button" class="rte-btn" @mousedown.prevent @click="insertHeading(1)" title="Heading 1">H1</button>
         <button type="button" class="rte-btn" @mousedown.prevent @click="insertHeading(2)" title="Heading 2">H2</button>
         <button type="button" class="rte-btn" @mousedown.prevent @click="insertHeading(3)" title="Heading 3">H3</button>
+        <button type="button" class="rte-btn" @mousedown.prevent @click="insertHeading(4)" title="Heading 4">H4</button>
+        <button type="button" class="rte-btn" @mousedown.prevent @click="insertHeading(5)" title="Heading 5">H5</button>
+        <button type="button" class="rte-btn" @mousedown.prevent @click="insertHeading(6)" title="Heading 6">H6</button>
         <span class="rte-divider"></span>
         <button type="button" class="rte-btn" @mousedown.prevent @click="insertBold" title="Bold"><strong>B</strong></button>
         <button type="button" class="rte-btn" @mousedown.prevent @click="insertItalic" title="Italic"><em>I</em></button>
