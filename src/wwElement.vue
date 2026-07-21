@@ -44,15 +44,15 @@
           </template>
           <template v-else-if="linkModal.type === 'email'">
             <label class="rte-modal-label">Email address</label>
-            <input v-model="linkModal.value" class="rte-modal-input" placeholder="name@example.com" />
+            <input v-model="linkModal.value" class="rte-modal-input" placeholder="name@example.com" @focus="$event.target.select()" />
           </template>
           <template v-else-if="linkModal.type === 'phone'">
             <label class="rte-modal-label">Phone number</label>
-            <input v-model="linkModal.value" class="rte-modal-input" placeholder="+1 555 555 5555" />
+            <input v-model="linkModal.value" class="rte-modal-input" placeholder="+1 555 555 5555" @focus="$event.target.select()" />
           </template>
           <template v-else>
             <label class="rte-modal-label">Url</label>
-            <input v-model="linkModal.value" class="rte-modal-input" placeholder="https://example.com" @keydown.enter="applyLinkModal" />
+            <input v-model="linkModal.value" class="rte-modal-input" placeholder="https://example.com" @keydown.enter="applyLinkModal" @focus="$event.target.select()" />
           </template>
 
           <template v-if="linkModal.type === 'url' || linkModal.type === 'page'">
